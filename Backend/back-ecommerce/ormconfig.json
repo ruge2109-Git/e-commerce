@@ -1,0 +1,12 @@
+{
+    "type": "mysql",
+    "host": "localhost",
+    "port": 3306,
+    "username": "admin",
+    "password": "RugePass2020*",
+    "database": "ecommerce",
+    "entities": [
+        "dist/**/entities/*.entity.js"
+    ],
+    "synchronize": false
+}

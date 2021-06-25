@@ -1,0 +1,22 @@
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center pb-5">
+      <div class="col-md-7 heading-section text-center wow animate__animated animate__fadeInUp">
+        <span class="subheading">Nuestras deliciosas ofertas</span>
+        <h2>con buen gusto tuyo </h2>
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="col-md-3" *ngFor="let prod of productos | async">
+        <app-tarjeta-producto [producto]="prod"></app-tarjeta-producto>
+      </div>
+
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <a  class="btn btn-primary d-block">Ver todos los productos <span class="fa fa-long-arrow-right"></span></a>
+      </div>
+    </div>
+  </div>
+</section>

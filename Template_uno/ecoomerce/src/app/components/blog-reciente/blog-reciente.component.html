@@ -1,0 +1,29 @@
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-7 heading-section text-center wow animate__animated animate__fadeInUp">
+        <span class="subheading">Blog</span>
+        <h2>Blog reciente</h2>
+      </div>
+    </div>
+    <div class="row d-flex">
+
+      <div class="col-lg-6 d-flex align-items-stretch wow animate__animated animate__fadeInUp" *ngFor="let blog of blogs">
+        <div class="blog-entry d-flex">
+          <a href="blog-single.html" class="block-20 img" style="background-image: url('{{blog.url_imagen}}');">
+          </a>
+          <div class="text p-4 bg-light">
+            <div class="meta">
+              <p><span class="fa fa-calendar"></span> {{blog.fecha}}</p>
+            </div>
+            <h3 class="heading mb-3"><a href="#">{{blog.titulo}}</a></h3>
+            <p>{{blog.descripcion}}</p>
+            <a href="#" class="btn-custom">Continuar <span class="fa fa-long-arrow-right"></span></a>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

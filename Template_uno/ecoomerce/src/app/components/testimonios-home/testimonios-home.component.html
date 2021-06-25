@@ -1,0 +1,39 @@
+<section class="ftco-section testimony-section img" style="background-image: url(assets/images/bg_4.jpg);">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-7 text-center heading-section heading-section-white wow animate__animated animate__fadeInUp">
+        <span class="subheading">Testimonios</span>
+        <h2 class="mb-3">Clientes felices</h2>
+      </div>
+    </div>
+    <div class="row wow animate__animated animate__fadeInUp">
+      <div class="col-md-12">
+
+        <owl-carousel-o [options]="customOptions">
+          <ng-container *ngFor="let testimonio of testimonios">
+            <ng-template carouselSlide>
+              <div class="item">
+                <div class="testimony-wrap py-4">
+                  <div class="icon d-flex align-items-center justify-content-center"><span
+                      class="fa fa-quote-left"></span>
+                  </div>
+                  <div class="text">
+                    <p class="mb-4">{{testimonio.testimonio}}</p>
+                    <div class="d-flex align-items-center">
+                      <div class="user-img" style="background-image: url({{testimonio.url_imagen}})"></div>
+                      <div class="pl-3">
+                        <p class="name">{{testimonio.nombre}}</p>
+                        <span class="position">{{testimonio.cargo}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+      </div>
+    </div>
+  </div>
+</section>
