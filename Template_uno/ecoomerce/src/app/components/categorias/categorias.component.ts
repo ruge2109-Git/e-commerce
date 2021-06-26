@@ -18,7 +18,7 @@ export class CategoriasComponent implements OnInit {
 
   constructor(private store:Store, private categoriaService:CategoriaService) {
 
-    categoriaService.obtenerTodas();
+    this.categoriaService.obtenerTodas();
 
     store.dispatch(new ObtenerCategorias());
     this.categorias = this.store.select(state => {

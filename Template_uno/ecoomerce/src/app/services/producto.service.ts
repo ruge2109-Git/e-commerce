@@ -1,16 +1,15 @@
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RtaApi } from '../models/rta-api';
-import { Categoria } from '../states/categorias/categoria.model';
-import { AuthJwtService } from './auth-jwt.service';
 import { Store } from '@ngxs/store';
-import { AgregarCategorias } from '../states/categorias/categoria.actions';
+import { RtaApi } from '../models/rta-api';
+import { AgregarProductos } from '../states/producto/Producto.actions';
+import { Producto } from '../states/producto/Producto.model';
+import { AuthJwtService } from './auth-jwt.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriaService {
-
+export class ProductoService {
 
   constructor(private http: HttpClient, private authService:AuthJwtService,private store:Store) { }
 
@@ -18,13 +17,12 @@ export class CategoriaService {
     localStorage.clear();
     await this.authService.login();
     let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
-    await this.http.get<RtaApi<Categoria>>('/categorias', { headers: headers }).toPromise().then(
+    await this.http.get<RtaApi<Producto>>('/producto', { headers: headers }).toPromise().then(
       (data) => {
         if (data.flag) {
-          this.store.dispatch(new AgregarCategorias(data.data));
+          this.store.dispatch(new AgregarProductos(data.data));
         }
       }
     );
   }
-
 }

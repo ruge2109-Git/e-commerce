@@ -5,7 +5,6 @@ export class CarritoCompras{
 }
 
 export interface Carrito{
-  cod_carrito:number;
   producto: Producto;
   cantidad_comprar: number;
 }

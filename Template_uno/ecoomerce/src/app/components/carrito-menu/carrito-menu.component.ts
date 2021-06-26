@@ -16,8 +16,13 @@ export class CarritoMenuComponent implements OnInit {
 
   constructor(private store:Store) {
     this.carrito = this.store.select(state => {
-      this.longitudCarrito = state.carrito.carrito.length;
-      return state.carrito.carrito;
+      const carrito = state.carrito.carrito;
+      this.longitudCarrito = carrito.length;
+
+      if (this.longitudCarrito < 3) {
+        return carrito;
+      }
+      return carrito.slice(0,3);
     });
   }
 

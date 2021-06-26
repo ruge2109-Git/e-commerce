@@ -5,12 +5,12 @@ export class Productos{
 }
 
 export interface Producto{
-  cod_producto: number;
-  cod_tipo_producto: Categoria;
+  codProducto: number;
+  codCategoria: Categoria;
   nombre: string;
   descripcion: string;
   precio: number;
-  cantidad_inventario: number;
-  url_imagen: string;
+  cantidadInventario: number;
+  urlImagen: string;
 }
 

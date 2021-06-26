@@ -6,13 +6,13 @@
   <div class="dropdown-menu dropdown-menu-right">
 
     <div class="dropdown-item d-flex align-items-start" href="#" *ngFor="let car of carrito | async">
-      <div class="img" style="background-image: url({{car.producto.url_imagen}});"></div>
+      <div class="img" style="background-image: url({{car.producto.urlImagen}});"></div>
       <div class="text pl-3">
         <h4>{{car.producto.nombre}}</h4>
-        <p class="mb-0"><a href="#" class="price">{{car.producto.precio}}</a><span class="quantity ml-3">{{car.cantidad_comprar}}</span></p>
+        <p class="mb-0"><a href="#" class="price">{{car.producto.precio | currency:'$'}}</a><span class="quantity ml-3">cantidad: {{car.cantidad_comprar}}</span></p>
       </div>
     </div>
 
-    <a class="dropdown-item text-center btn-link d-block w-100" href="cart.html">Ver todo<span class="ion-ios-arrow-round-forward"></span></a>
+    <a class="dropdown-item text-center btn-link d-block w-100" routerLink="/productos">Ver todo<span class="ion-ios-arrow-round-forward"></span></a>
   </div>
 </div>

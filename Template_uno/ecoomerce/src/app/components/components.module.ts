@@ -12,6 +12,7 @@ import { BlogRecienteComponent } from './blog-reciente/blog-reciente.component';
 import { FooterComponent } from './footer/footer.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { TarjetaProductoComponent } from './tarjeta-producto/tarjeta-producto.component';
+import { LoadingComponent } from './loading/loading.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { TarjetaProductoComponent } from './tarjeta-producto/tarjeta-producto.co
     TestimoniosHomeComponent,
     BlogRecienteComponent,
     FooterComponent,
-    TarjetaProductoComponent
+    TarjetaProductoComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +46,8 @@ import { TarjetaProductoComponent } from './tarjeta-producto/tarjeta-producto.co
     BlogRecienteComponent,
     FooterComponent,
     CarouselModule,
-    TarjetaProductoComponent
+    TarjetaProductoComponent,
+    LoadingComponent
   ]
 })
 export class ComponentsModule { }

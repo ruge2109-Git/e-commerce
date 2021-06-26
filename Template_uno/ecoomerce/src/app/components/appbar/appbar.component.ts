@@ -12,8 +12,6 @@ export class AppbarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.itemActivo);
-
   }
 
 }

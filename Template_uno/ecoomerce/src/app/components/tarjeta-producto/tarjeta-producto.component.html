@@ -1,16 +1,15 @@
 <div class="product wow animate__animated animate__fadeInUp">
   <div class="img d-flex align-items-center justify-content-center"
-    style="background-image: url({{producto.url_imagen}});">
+    style="background-image: url({{producto.urlImagen}});">
     <div class="desc">
       <p class="meta-prod d-flex">
-        <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
-        <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
-        <a href="#" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
+        <a class="d-flex align-items-center justify-content-center" (click)="agregarAlCarrito()"><span class="flaticon-shopping-bag"></span></a>
+        <a class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
       </p>
     </div>
   </div>
   <div class="text text-center">
-    <span class="category">{{producto.cod_tipo_producto.nombre}}</span>
+    <span class="category">{{producto.codCategoria.nombre}}</span>
     <h2>{{producto.nombre}}</h2>
     <p class="mb-0"> <span class="price">{{producto.precio | currency:'$'}}</span></p>
   </div>
