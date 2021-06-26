@@ -1,10 +1,10 @@
 <section class="ftco-section ftco-no-pb">
   <div class="container">
     <div class="row">
-      <div class="col-lg-2 col-md-4 wow animate__animated animate__fadeInUp" *ngFor="let categoria of categorias">
+      <div class="col-lg-2 col-md-4 wow animate__animated animate__fadeInUp" *ngFor="let categoria of categorias | async">
 
         <div class="sort w-100 text-center" >
-          <div class="img" style="background-image: url({{categoria.url_img}});"></div>
+          <div class="img" style="background-image: url({{categoria.urlImagen}});"></div>
           <h3>{{categoria.nombre}}</h3>
         </div>
 

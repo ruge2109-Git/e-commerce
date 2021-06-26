@@ -22,7 +22,6 @@ export class ProductoState {
   @Action(ObtenerProductos)
   obtenerProductos({ getState, patchState }: StateContext<Productos>, { }: ObtenerProductos) {
     this.llenarInformacion();
-    console.log("HOLA");
     patchState({
       productos: [...this.productos]
     });
@@ -31,34 +30,34 @@ export class ProductoState {
 
   llenarInformacion(){
     this.categorias.push({
-      cod_categoria: 1,
+      codCategoria: 1,
       nombre:'Brandy',
-      url_img:'assets/images/kind-1.jpg'
+      urlImagen:'assets/images/kind-1.jpg'
     });
     this.categorias.push({
-      cod_categoria: 2,
+      codCategoria: 2,
       nombre:'Gin',
-      url_img:'assets/images/kind-2.jpg'
+      urlImagen:'assets/images/kind-2.jpg'
     });
     this.categorias.push({
-      cod_categoria: 3,
+      codCategoria: 3,
       nombre:'Rum',
-      url_img:'assets/images/kind-3.jpg'
+      urlImagen:'assets/images/kind-3.jpg'
     });
     this.categorias.push({
-      cod_categoria: 4,
+      codCategoria: 4,
       nombre:'Tequila',
-      url_img:'assets/images/kind-4.jpg'
+      urlImagen:'assets/images/kind-4.jpg'
     });
     this.categorias.push({
-      cod_categoria: 5,
+      codCategoria: 5,
       nombre:'Vodka',
-      url_img:'assets/images/kind-5.jpg'
+      urlImagen:'assets/images/kind-5.jpg'
     });
     this.categorias.push({
-      cod_categoria: 6,
+      codCategoria: 6,
       nombre:'Whiskey',
-      url_img:'assets/images/kind-6.jpg'
+      urlImagen:'assets/images/kind-6.jpg'
     });
 
     this.productos = [

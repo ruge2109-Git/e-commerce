@@ -9,10 +9,10 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { environment } from 'src/environments/environment';
 import { CarritoState } from './states/carrito/Carrito.state';
 import { NgwWowModule } from 'ngx-wow';
-// import { CarouselModule } from 'ngx-owl-carousel-o';
-// import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductoState } from './states/producto/Producto.state';
+import { CategoriaState } from './states/categorias/categoria.state';
 
 
 @NgModule({
@@ -24,7 +24,8 @@ import { ProductoState } from './states/producto/Producto.state';
     AppRoutingModule,
     NgxsModule.forRoot([
       CarritoState,
-      ProductoState
+      ProductoState,
+      CategoriaState
     ],
       { developmentMode: !environment.production },
     ),
@@ -35,7 +36,8 @@ import { ProductoState } from './states/producto/Producto.state';
       disabled: environment.production
     }),
     NgwWowModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,9 @@
+export class Categorias{
+  categorias:Categoria[] = [];
+}
+
 export interface Categoria{
-  cod_categoria:number;
+  codCategoria:number;
   nombre:string;
-  url_img:string;
+  urlImagen:string;
 }

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { CategoriaService } from 'src/app/services/categoria.service';
+import { ObtenerCategorias } from 'src/app/states/categorias/categoria.actions';
 import { Categoria } from 'src/app/states/categorias/categoria.model';
 
 @Component({
@@ -8,41 +12,24 @@ import { Categoria } from 'src/app/states/categorias/categoria.model';
 })
 export class CategoriasComponent implements OnInit {
 
-  public categorias:Categoria[] = [];
+  public categorias:Observable<Categoria[]>;
+  public longitudCategorias:number = 0;
 
-  constructor() { }
+
+  constructor(private store:Store, private categoriaService:CategoriaService) {
+
+    categoriaService.obtenerTodas();
+
+    store.dispatch(new ObtenerCategorias());
+    this.categorias = this.store.select(state => {
+      this.longitudCategorias = state.categoria.categorias.length;
+      return state.categoria.categorias;
+    });
+
+  }
 
   ngOnInit(): void {
-    this.categorias.push({
-      cod_categoria: 1,
-      nombre:'Brandy',
-      url_img:'assets/images/kind-1.jpg'
-    });
-    this.categorias.push({
-      cod_categoria: 2,
-      nombre:'Gin',
-      url_img:'assets/images/kind-2.jpg'
-    });
-    this.categorias.push({
-      cod_categoria: 3,
-      nombre:'Rum',
-      url_img:'assets/images/kind-3.jpg'
-    });
-    this.categorias.push({
-      cod_categoria: 4,
-      nombre:'Tequila',
-      url_img:'assets/images/kind-4.jpg'
-    });
-    this.categorias.push({
-      cod_categoria: 5,
-      nombre:'Vodka',
-      url_img:'assets/images/kind-5.jpg'
-    });
-    this.categorias.push({
-      cod_categoria: 6,
-      nombre:'Whiskey',
-      url_img:'assets/images/kind-6.jpg'
-    });
+
   }
 
 }
