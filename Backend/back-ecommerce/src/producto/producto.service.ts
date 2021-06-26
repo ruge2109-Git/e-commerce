@@ -1,26 +1,70 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { CreateProductoDto } from './dto/create-producto.dto';
 import { UpdateProductoDto } from './dto/update-producto.dto';
+import { ProductoRepository } from './producto.repository';
 
 @Injectable()
 export class ProductoService {
-  create(createProductoDto: CreateProductoDto) {
-    return 'This action adds a new producto';
+  constructor(@InjectRepository(ProductoRepository) private productoRepository: ProductoRepository) {
+
   }
 
-  findAll() {
-    return `This action returns all producto`;
+  async create(createProductoDto: CreateProductoDto) {
+    try {
+      let dataNueva = this.productoRepository.create({ ...createProductoDto });
+      const data = await this.productoRepository.save(dataNueva);
+      if (data == null) return { "flag": false, "msg": "No hay información" };
+      return { "flag": true, "msg": "Correcto", "data": data };
+    }
+    catch (error) {
+      return { "flag": false, "msg": "Error" };
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} producto`;
+  async findAll() {
+    try {
+      const data = await this.productoRepository.find();
+      if (data == null) return { "flag": false, "msg": "No hay información" };
+      return { "flag": true, "msg": "Correcto", "data": data };
+    }
+    catch (error) {
+      return { "flag": false, "msg": "Error" };
+    }
   }
 
-  update(id: number, updateProductoDto: UpdateProductoDto) {
-    return `This action updates a #${id} producto`;
+  async findOne(id: number) {
+    try {
+      const data = await this.productoRepository.findOne(id);
+      if (data == null) return { "flag": false, "msg": "No hay información" };
+      return { "flag": true, "msg": "Correcto", "data": data };
+    }
+    catch (error) {
+      return { "flag": false, "msg": "Error" };
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} producto`;
+  async update(id: number, updateProductoDto: UpdateProductoDto) {
+    try {
+      const dataBuscada = await this.productoRepository.findOne(id);
+      const dataEditada = Object.assign(dataBuscada, updateProductoDto);
+      const data = await this.productoRepository.save(dataEditada);
+      if (data == null) return { "flag": false, "msg": "No hay información" };
+      return { "flag": true, "msg": "Correcto", "data": data };
+    }
+    catch (error) {
+      return { "flag": false, "msg": "Error" };
+    }
+  }
+
+  async remove(id: number) {
+    try {
+      const data = await this.productoRepository.delete(id);
+      if (data == null) return { "flag": false, "msg": "No hay información" };
+      return { "flag": true, "msg": "Correcto", "data": data };
+    }
+    catch (error) {
+      return { "flag": false, "msg": "Error" };
+    }
   }
 }
