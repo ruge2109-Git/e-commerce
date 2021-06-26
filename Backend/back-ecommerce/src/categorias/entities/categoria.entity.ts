@@ -1,5 +1,6 @@
 import { Producto } from "src/producto/entities/producto.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+@Entity("categoria", { schema: "ecommerce" })
 
 export class Categoria {
     @PrimaryGeneratedColumn({ type: "int", name: "cod_categoria" })
@@ -11,6 +12,6 @@ export class Categoria {
     @Column("varchar", { name: "url_imagen", nullable: true, length: 255 })
     urlImagen: string | null;
 
-    // @OneToMany(() => Producto, (producto) => producto.codCategoria2)
-    // productos: Producto[];
+    @OneToMany(() => Producto, (producto) => producto.codCategoria2)
+    productos: Producto[];
 }

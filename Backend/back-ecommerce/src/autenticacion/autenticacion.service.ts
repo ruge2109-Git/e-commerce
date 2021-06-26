@@ -32,7 +32,7 @@ export class AutenticacionService {
   async login(usuario: CreateAutenticacionDto) {
     return {
       flag:true,
-      token: this.jwtService.sign(usuario),
+      msg: this.jwtService.sign(usuario),
     };
   }
 
