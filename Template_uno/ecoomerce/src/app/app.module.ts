@@ -1,3 +1,4 @@
+import { ComponentsModule } from './components/components.module';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -37,7 +38,7 @@ import { ErrorHandlerInterceptor } from './services/interceptores/error-handler.
     }),
     NgwWowModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiPrefixInterceptor, multi: true },

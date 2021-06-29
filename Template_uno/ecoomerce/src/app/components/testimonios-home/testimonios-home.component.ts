@@ -12,7 +12,7 @@ export class TestimoniosHomeComponent implements OnInit {
   customOptions: OwlOptions = {
     center: true,
     loop: true,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed:2000,
     items:1,
     margin: 30,

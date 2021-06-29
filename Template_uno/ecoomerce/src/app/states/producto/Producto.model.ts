@@ -6,7 +6,8 @@ export class Productos{
 
 export interface Producto{
   codProducto: number;
-  codCategoria: Categoria;
+  codCategoria: number;
+  codCategoria2: Categoria;
   nombre: string;
   descripcion: string;
   precio: number;

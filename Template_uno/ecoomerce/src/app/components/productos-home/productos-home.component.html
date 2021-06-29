@@ -8,7 +8,7 @@
     </div>
     <div class="row">
 
-      <div class="col-md-3" *ngFor="let prod of productos | async">
+      <div class="col-md-3  wow animate__animated animate__fadeInUp" *ngFor="let prod of productos | async">
         <app-tarjeta-producto [producto]="prod"></app-tarjeta-producto>
       </div>
 

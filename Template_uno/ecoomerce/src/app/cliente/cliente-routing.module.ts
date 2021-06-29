@@ -7,11 +7,11 @@ import { NosotrosComponent } from './nosotros/nosotros.component';
 import { ProductosComponent } from './productos/productos.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'nosotros', component: NosotrosComponent },
-  { path: 'productos', component: ProductosComponent },
-  { path: 'blog', component: BlogComponent },
-  { path: 'contacto', component: ContactoComponent },
+  { path: '', component: HomeComponent, data: { depth: 1 } },
+  { path: 'nosotros', component: NosotrosComponent, data: { depth: 2 } },
+  { path: 'productos', component: ProductosComponent, data: { depth: 3 } },
+  { path: 'blog', component: BlogComponent, data: { depth: 4 } },
+  { path: 'contacto', component: ContactoComponent, data: { depth: 5 } },
 ];
 
 @NgModule({
