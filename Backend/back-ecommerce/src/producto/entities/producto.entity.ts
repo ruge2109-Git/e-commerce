@@ -36,10 +36,11 @@ export class Producto {
   @OneToMany(() => DetalleCompra, (detalleCompra) => detalleCompra.codProducto2)
   detalleCompras: DetalleCompra[];
 
-  // @ManyToOne(() => Categoria, (categoria) => categoria.productos, {
-  //   onDelete: "RESTRICT",
-  //   onUpdate: "RESTRICT",
-  // })
+  @ManyToOne(() => Categoria, (categoria) => categoria.codCategoria, {
+    onDelete: "RESTRICT",
+    onUpdate: "RESTRICT",
+    eager:true
+  })
   @JoinColumn([{ name: "cod_categoria", referencedColumnName: "codCategoria" }])
   codCategoria2: Categoria;
 

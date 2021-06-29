@@ -24,7 +24,7 @@ export class ProductoService {
 
   async findAll() {
     try {
-      const data = await this.productoRepository.find();
+      const data = await this.productoRepository.find();      
       if (data == null) return { "flag": false, "msg": "No hay información" };
       return { "flag": true, "msg": "Correcto", "data": data };
     }
@@ -36,6 +36,7 @@ export class ProductoService {
   async findOne(id: number) {
     try {
       const data = await this.productoRepository.findOne(id);
+
       if (data == null) return { "flag": false, "msg": "No hay información" };
       return { "flag": true, "msg": "Correcto", "data": data };
     }
