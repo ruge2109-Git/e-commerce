@@ -44,42 +44,54 @@ export class TestimoniosHomeComponent implements OnInit {
         nombre:'Jonathan Ruge',
         cargo:'Marketing manager',
         testimonio:'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.',
-        url_imagen:'assets/images/person_1.jpg'
+        urlImagen:'assets/images/person_1.jpg',
+        fecha:'25-09-2021',
+        puntuacion:5
       },
       {
         cod_testimonio:2,
         nombre:'Jonathan Ruge',
         cargo:'Marketing manager',
         testimonio:'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.',
-        url_imagen:'assets/images/person_2.jpg'
+        urlImagen:'assets/images/person_2.jpg',
+        fecha:'25-09-2021',
+        puntuacion:5
       },
       {
         cod_testimonio:3,
         nombre:'Jonathan Ruge',
         cargo:'Marketing manager',
         testimonio:'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.',
-        url_imagen:'assets/images/person_3.jpg'
+        urlImagen:'assets/images/person_3.jpg',
+        fecha:'25-09-2021',
+        puntuacion:5
       },
       {
         cod_testimonio:4,
         nombre:'Jonathan Ruge',
         cargo:'Marketing manager',
         testimonio:'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.',
-        url_imagen:'assets/images/person_4.jpg'
+        urlImagen:'assets/images/person_4.jpg',
+        fecha:'25-09-2021',
+        puntuacion:5
       },
       {
         cod_testimonio:5,
         nombre:'Jonathan Ruge',
         cargo:'Marketing manager',
         testimonio:'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.',
-        url_imagen:'assets/images/person_1.jpg'
+        urlImagen:'assets/images/person_1.jpg',
+        fecha:'25-09-2021',
+        puntuacion:5
       },
       {
         cod_testimonio:6,
         nombre:'Jonathan Ruge',
         cargo:'Marketing manager',
         testimonio:'orem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.',
-        url_imagen:'assets/images/person_2.jpg'
+        urlImagen:'assets/images/person_2.jpg',
+        fecha:'25-09-2021',
+        puntuacion:5
       },
     ];
   }

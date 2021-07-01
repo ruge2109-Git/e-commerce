@@ -11,18 +11,25 @@ import { AuthJwtService } from './auth-jwt.service';
 })
 export class ProductoService {
 
-  constructor(private http: HttpClient, private authService:AuthJwtService,private store:Store) { }
+  constructor(private http: HttpClient, private authService: AuthJwtService, private store: Store) { }
 
   async obtenerTodas() {
     localStorage.clear();
     await this.authService.login();
     let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
-    await this.http.get<RtaApi<Producto>>('/producto', { headers: headers }).toPromise().then(
+    await this.http.get<RtaApi<Producto[]>>('/producto', { headers: headers }).toPromise().then(
       (data) => {
         if (data.flag) {
           this.store.dispatch(new AgregarProductos(data.data));
         }
       }
     );
+  }
+
+  async obtenerProducto(id: string | null) {
+    localStorage.clear();
+    await this.authService.login();
+    let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
+    return this.http.get<RtaApi<Producto>>(`/producto/${id}`, { headers: headers }).toPromise();
   }
 }

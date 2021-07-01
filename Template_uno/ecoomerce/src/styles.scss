@@ -16,6 +16,11 @@
   display:block;
 }
 
+.ngxImageZoomThumbnail[_ngcontent-uym-c23] {
+  pointer-events: all;
+  width:50%;
+}
+
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -12257,7 +12262,6 @@ textarea.form-control {
 .mfp-with-zoom .mfp-container,
 .mfp-with-zoom.mfp-bg {
   opacity: 0;
-  -webkit-backface-visibility: hidden;
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;

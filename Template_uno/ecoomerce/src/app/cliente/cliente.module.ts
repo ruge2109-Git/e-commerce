@@ -8,7 +8,9 @@ import { NosotrosComponent } from './nosotros/nosotros.component';
 import { ProductosComponent } from './productos/productos.component';
 import { BlogComponent } from './blog/blog.component';
 import { ContactoComponent } from './contacto/contacto.component';
-
+import { DetalleProductoComponent } from './detalle-producto/detalle-producto.component';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,12 +18,15 @@ import { ContactoComponent } from './contacto/contacto.component';
     NosotrosComponent,
     ProductosComponent,
     BlogComponent,
-    ContactoComponent
+    ContactoComponent,
+    DetalleProductoComponent
   ],
   imports: [
     CommonModule,
     ClienteRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    NgxImageZoomModule,
+    FormsModule
   ]
 })
 export class ClienteModule { }

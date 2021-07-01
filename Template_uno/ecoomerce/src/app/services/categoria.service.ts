@@ -18,7 +18,7 @@ export class CategoriaService {
     localStorage.clear();
     await this.authService.login();
     let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
-    await this.http.get<RtaApi<Categoria>>('/categorias', { headers: headers }).toPromise().then(
+    await this.http.get<RtaApi<Categoria[]>>('/categorias', { headers: headers }).toPromise().then(
       (data) => {
         if (data.flag) {
           this.store.dispatch(new AgregarCategorias(data.data));

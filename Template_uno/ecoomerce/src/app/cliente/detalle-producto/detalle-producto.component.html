@@ -1,0 +1,136 @@
+<app-loading *ngIf="spinner"></app-loading>
+
+<app-appbar itemActivo="productos"></app-appbar>
+<section class="hero-wrap hero-wrap-2" style="background-image: url('assets/images/bg_2.jpg');"
+  data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-end justify-content-center">
+      <div class="col-md-9 animate__animated animate__fadeInUp  mb-5 text-center">
+        <p class="breadcrumbs mb-0"><span class="mr-2"><a href="index.html">Inicio
+          <i class="fa fa-chevron-right"></i></a></span> <span>Productos <i class="fa fa-chevron-right"></i></span>
+        </p>
+        <h2 class="mb-0 bread">Detalle</h2>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="ftco-section" *ngIf="producto!=null">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mb-5 wow  animate__animated animate__fadeInUp">
+
+        <div class="modal-photo-details__photo">
+          <lib-ngx-image-zoom [thumbImage]="producto.urlImagen" zoomMode="hover" [circularLens]="true"
+            [lensHeight]="150" [lensWidth]="150" [enableLens]="true">
+          </lib-ngx-image-zoom>
+        </div>
+
+
+      </div>
+      <div class="col-lg-6 product-details pl-md-5 wow  animate__animated animate__fadeInUp">
+        <h3>{{producto.nombre}}</h3>
+
+        <p class="price"><span>{{producto.precio | currency:'$'}}</span></p>
+        <p>{{producto.descripcion}}</p>
+        <div class="row mt-4">
+          <div class="input-group col-md-6 d-flex mb-3">
+            <span class="input-group-btn mr-2">
+              <button type="button" class="quantity-left-minus btn" data-type="minus" (click)="modificarCantidadCarrito('restar')">
+                <i class="fa fa-minus"></i>
+              </button>
+            </span>
+            <input type="number" id="quantity" name="quantity" class="quantity form-control input-number" [(ngModel)]="cantidadCarrito" min="1" max="100">
+            <span class="input-group-btn ml-2">
+              <button type="button" class="quantity-right-plus btn" data-type="plus" (click)="modificarCantidadCarrito('sumar')">
+                <i class="fa fa-plus"></i>
+              </button>
+            </span>
+          </div>
+          <div class="w-100"></div>
+          <div class="col-md-12">
+            <p style="color: #000;">{{producto.cantidadInventario}} disponibles</p>
+          </div>
+        </div>
+        <p>
+          <a (click)="agregarAlCarrito()" class="btn btn-primary py-3 px-5 mr-2">Añadir al carrito</a>
+          <a class="btn btn-primary py-3 px-5">Ver carrito</a></p>
+      </div>
+    </div>
+
+
+
+
+    <div class="row mt-5">
+      <div class="col-md-12 nav-link-wrap">
+        <div class="nav nav-pills d-flex text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+          <a class="nav-link wow  animate__animated animate__fadeInUp active" id="v-pills-3-tab" data-toggle="pill"
+            href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Reseñas</a>
+
+        </div>
+      </div>
+      <div class="col-md-12 tab-wrap">
+
+        <div class="tab-content bg-light" id="v-pills-tabContent">
+
+          <div class="tab-pane fade show active" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-day-3-tab">
+            <div class="row p-4">
+              <div class="col-md-6">
+                <h3 class="mb-4" *ngIf="testimonios.length == 1">{{testimonios.length }} Reseña</h3>
+                <h3 class="mb-4" *ngIf="testimonios.length != 1">{{testimonios.length }} Reseñas</h3>
+                <div class="review" *ngFor="let testimonio of testimonios">
+                  <div class="user-img" *ngIf="testimonio.urlImagen != ''" style="background-image: url({{testimonio.urlImagen}})"></div>
+                  <div class="user-img" *ngIf="testimonio.urlImagen == ''" style="background-image: url(./assets/images/person_1.jpg)"></div>
+                  <div class="desc mb-4">
+                    <h4>
+                      <span class="text-left">{{testimonio.nombre}}</span>
+                      <span class="text-right">{{testimonio.fecha}}</span>
+                    </h4>
+                    <p class="star">
+                      <span *ngIf="testimonio.puntuacion == 1">
+                        <i class="fa fa-star"></i>
+                      </span>
+                      <span *ngIf="testimonio.puntuacion == 2">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                      </span>
+                      <span *ngIf="testimonio.puntuacion == 3">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                      </span>
+                      <span *ngIf="testimonio.puntuacion == 4">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                      </span>
+                      <span *ngIf="testimonio.puntuacion == 5">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                      </span>
+                    </p>
+                    <p>{{testimonio.testimonio}}</p>
+                  </div>
+                </div>
+
+
+              </div>
+              <div class="col-md-6">
+                <div class="rating-wrap">
+                  <h3 class="mb-4">Escribe una reseña</h3>
+                  <app-formulario-resenia *ngIf="producto!=null" (cargarTestimonios)="cargarTestimonioEnviado($event)" [codProducto]="producto.codProducto"></app-formulario-resenia>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>

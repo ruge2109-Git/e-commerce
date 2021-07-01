@@ -1,0 +1,47 @@
+<form [formGroup]="frmDatos" (ngSubmit)="enviarTestimonio()">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="label" for="nombre">Nombre</label>
+        <input type="text" class="form-control" formControlName="nombre" name="nombre" id="nombre" placeholder="Nombre">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="label" for="cargo">Profesión</label>
+        <input type="text" class="form-control" formControlName="cargo" name="cargo" id="cargo" placeholder="Profesión">
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label class="label" for="ranked">Calificación</label>
+        <p class="clasificacion">
+          <input type="radio"  id="cal5" value="5" formControlName="puntuacion">
+          <label class="labelRadio" for="cal5">★</label>
+
+          <input type="radio"  id="cal4" value="4" formControlName="puntuacion">
+          <label class="labelRadio" for="cal4">★</label>
+
+          <input type="radio"  id="cal3" value="3" formControlName="puntuacion">
+          <label class="labelRadio" for="cal3">★</label>
+
+          <input type="radio"  id="cal2" value="2" formControlName="puntuacion">
+          <label class="labelRadio" for="cal2">★</label>
+
+          <input type="radio"  id="cal1" value="1" formControlName="puntuacion">
+          <label class="labelRadio" for="cal1">★</label>
+
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label class="label" for="testimonio">Reseña</label>
+        <textarea rows="6" class="form-control " formControlName="testimonio" name="testimonio" id="testimonio" placeholder="Escribe tu reseña de este producto"></textarea>
+      </div>
+    </div>
+  </div>
+  <input type="submit" class="btn btn-primary py-3 px-5 w-100" value="Enviar" [disabled] ="frmDatos.invalid">
+</form>

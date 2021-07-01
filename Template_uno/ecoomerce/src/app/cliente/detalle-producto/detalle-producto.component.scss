@@ -1,0 +1,28 @@
+.modal-photo-details {
+  &__photo {
+      ::ng-deep {
+          .ngxImageZoomFullContainer {
+              border-radius: 5px !important;
+          }
+
+          .ngxImageZoomContainer {
+              width: 100% !important;
+              height: 100% !important;
+
+              > img {
+                  max-width: 100% !important;
+                  max-height: 100% !important;
+              }
+              .ngxImageZoomFull {
+                  background: white !important;
+              }
+          }
+      }
+  }
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

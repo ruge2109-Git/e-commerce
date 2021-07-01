@@ -4,7 +4,7 @@
     <div class="desc">
       <p class="meta-prod d-flex">
         <a class="d-flex align-items-center justify-content-center" (click)="agregarAlCarrito()"><span class="flaticon-shopping-bag"></span></a>
-        <a class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
+        <a class="d-flex align-items-center justify-content-center" [routerLink]="['/detalle', producto.codProducto]"><span class="flaticon-visibility"></span></a>
       </p>
     </div>
   </div>

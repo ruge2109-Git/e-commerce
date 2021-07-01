@@ -29,7 +29,7 @@ export class CarritoState {
     carritoNuevo.forEach(element => {
       if (payload.producto?.codProducto == element.producto?.codProducto) {
 
-        const cantidad = element.cantidad_comprar + 1;
+        const cantidad = element.cantidad_comprar + payload.cantidad_comprar;
         const carritoModificado: Carrito = {
           cantidad_comprar: cantidad,
           producto: element.producto

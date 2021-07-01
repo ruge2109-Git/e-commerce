@@ -13,8 +13,8 @@ import { FooterComponent } from './footer/footer.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { TarjetaProductoComponent } from './tarjeta-producto/tarjeta-producto.component';
 import { LoadingComponent } from './loading/loading.component';
-
-
+import { FormularioReseniaComponent } from './formulario-resenia/formulario-resenia.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppbarComponent,
@@ -27,12 +27,14 @@ import { LoadingComponent } from './loading/loading.component';
     BlogRecienteComponent,
     FooterComponent,
     TarjetaProductoComponent,
-    LoadingComponent
+    LoadingComponent,
+    FormularioReseniaComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
-    CarouselModule
+    CarouselModule,
+    ReactiveFormsModule
 
   ],
   exports:[
@@ -47,7 +49,8 @@ import { LoadingComponent } from './loading/loading.component';
     FooterComponent,
     CarouselModule,
     TarjetaProductoComponent,
-    LoadingComponent
+    LoadingComponent,
+    FormularioReseniaComponent
   ]
 })
 export class ComponentsModule { }
