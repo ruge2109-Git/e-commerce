@@ -1,12 +1,5 @@
 import { Producto } from "src/producto/entities/producto.entity";
-import {
-    Column,
-    Entity,
-    Index,
-    JoinColumn,
-    ManyToOne,
-    PrimaryGeneratedColumn,
-} from "typeorm";
+import { Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Index("FKtestimonio872084", ["codProducto"], {})
 @Entity("testimonio", { schema: "ecommerce" })
@@ -28,6 +21,12 @@ export class Testimonio {
 
     @Column("varchar", { name: "testimonio", nullable: true, length: 255 })
     testimonio: string | null;
+
+    @Column("date", { name: "fecha", nullable: false })
+    fecha: Date | null;
+    
+    @Column("int", { name: "puntuacion" })
+    puntuacion: number | null;
 
     @ManyToOne(() => Producto, (producto) => producto.testimonios, {
         onDelete: "RESTRICT",

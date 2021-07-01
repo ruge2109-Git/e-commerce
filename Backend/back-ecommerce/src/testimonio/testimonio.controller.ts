@@ -22,6 +22,11 @@ export class TestimonioController {
     return this.testimonioService.findOne(+id);
   }
 
+  @Get('/producto/:id')
+  findByProducto(@Param('id') id:string){
+    return this.testimonioService.findByProducto(+id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTestimonioDto: UpdateTestimonioDto) {
     return this.testimonioService.update(+id, updateTestimonioDto);
