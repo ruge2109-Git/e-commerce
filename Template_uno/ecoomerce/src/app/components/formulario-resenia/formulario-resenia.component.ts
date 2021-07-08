@@ -35,6 +35,7 @@ export class FormularioReseniaComponent implements OnInit {
   enviarTestimonio(){
 
     this.frmDatos.controls['codProducto'].setValue(this.codProducto);
+    this.frmDatos.controls['urlImagen'].setValue('');
     this.testimonioService.enviarTestimonio(this.frmDatos.value).then(
       (data)=>{
         if (data.flag) {

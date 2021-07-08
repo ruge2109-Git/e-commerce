@@ -11,6 +11,7 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { DetalleProductoComponent } from './detalle-producto/detalle-producto.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { FormsModule } from '@angular/forms';
+import { CarritoComponent } from './carrito/carrito.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FormsModule } from '@angular/forms';
     ProductosComponent,
     BlogComponent,
     ContactoComponent,
-    DetalleProductoComponent
+    DetalleProductoComponent,
+    CarritoComponent
   ],
   imports: [
     CommonModule,

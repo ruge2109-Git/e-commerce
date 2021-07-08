@@ -11,6 +11,13 @@ export class TestimonioService {
 
   constructor(private http: HttpClient, private authService: AuthJwtService) { }
 
+  async obtenerTestimonios(){
+    localStorage.clear();
+    await this.authService.login();
+    let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
+    return this.http.get<RtaApi<Testimonio[]>>(`/testimonio/`, { headers: headers }).toPromise();
+  }
+
   async obtenerTestimonioPorProducto(id: string | null) {
     localStorage.clear();
     await this.authService.login();

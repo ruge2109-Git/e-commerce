@@ -21,7 +21,8 @@
                   <div class="text">
                     <p class="mb-4">{{testimonio.testimonio}}</p>
                     <div class="d-flex align-items-center">
-                      <div class="user-img" style="background-image: url({{testimonio.urlImagen}})"></div>
+                      <div class="user-img" *ngIf="testimonio.urlImagen!=''" style="background-image: url({{testimonio.urlImagen}})"></div>
+                      <div class="user-img" *ngIf="testimonio.urlImagen==''" style="background-image: url(assets/images/person_1.jpg)"></div>
                       <div class="pl-3">
                         <p class="name">{{testimonio.nombre}}</p>
                         <span class="position">{{testimonio.cargo}}</span>

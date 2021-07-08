@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Get, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateTestimonioDto } from './dto/create-testimonio.dto';
 import { UpdateTestimonioDto } from './dto/update-testimonio.dto';
+import { Testimonio } from './entities/testimonio.entity';
 import { TestimonioRepository } from './testimonio.repository';
 
 @Injectable()
@@ -49,7 +50,7 @@ export class TestimonioService {
   async findByProducto(id: number) {
     try {
       const data = await this.testimonioRepo.find({
-        codProducto:id
+        codProducto: id
       });
       if (data == null) return { "flag": false, "msg": "No hay información" };
       return { "flag": true, "msg": "Correcto", "data": data };
