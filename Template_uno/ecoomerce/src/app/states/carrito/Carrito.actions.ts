@@ -14,3 +14,8 @@ export class RemoverDelCarrito {
   static readonly type = '[CARRITO] Remover';
   constructor(public payload: Carrito) {}
 }
+
+export class ActualizarCarrito{
+  static readonly type = '[CARRITO] Actualizar';
+  constructor(public payload:Carrito, public cantidadNueva:number) {}
+}

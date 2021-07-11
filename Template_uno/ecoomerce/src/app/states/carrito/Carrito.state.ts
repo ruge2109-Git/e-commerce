@@ -1,6 +1,6 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { Carrito, CarritoCompras } from './Carrito.model';
-import { AgregarAlCarrito, LimpiarCarrito, RemoverDelCarrito } from './Carrito.actions';
+import { ActualizarCarrito, AgregarAlCarrito, LimpiarCarrito, RemoverDelCarrito } from './Carrito.actions';
 
 @State({
   name: 'carrito',
@@ -64,6 +64,29 @@ export class CarritoState {
 
     patchState({
       carrito: carritoNuevo
+    });
+  }
+
+  @Action(ActualizarCarrito)
+  actualizar({ getState, patchState }: StateContext<CarritoCompras>, { payload, cantidadNueva }: ActualizarCarrito) {
+    const state = getState();
+    let carritoNuevo = state.carrito;
+
+    carritoNuevo.forEach(element => {
+      if (payload.producto?.codProducto == element.producto?.codProducto) {
+
+        const cantidad = cantidadNueva;
+        const carritoModificado: Carrito = {
+          cantidad_comprar: cantidad,
+          producto: element.producto
+        };
+
+        const carritoModificado_dos = carritoNuevo.filter(m => m.producto.codProducto != carritoModificado.producto.codProducto);
+
+        patchState({
+          carrito: [...carritoModificado_dos, carritoModificado]
+        });
+      }
     });
   }
 }
