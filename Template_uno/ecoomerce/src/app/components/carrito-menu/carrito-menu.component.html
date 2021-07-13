@@ -5,7 +5,7 @@
   </a>
   <div class="dropdown-menu dropdown-menu-right">
 
-    <div class="dropdown-item d-flex align-items-start" href="#" *ngFor="let car of carrito | async">
+    <div class="dropdown-item d-flex align-items-start" href="#" *ngFor="let car of carrito$ | async">
       <div class="img" style="background-image: url({{car.producto.urlImagen}});"></div>
       <div class="text pl-3">
         <h4>{{car.producto.nombre}}</h4>

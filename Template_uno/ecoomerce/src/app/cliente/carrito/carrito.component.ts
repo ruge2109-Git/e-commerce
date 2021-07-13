@@ -1,9 +1,8 @@
+import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Carrito } from 'src/app/states/carrito/Carrito.model';
-import { Store } from '@ngxs/store';
+import { Carrito, CarritoCompras } from 'src/app/states/carrito/Carrito.model';
 import { ActualizarCarrito, RemoverDelCarrito } from 'src/app/states/carrito/Carrito.actions';
-
 @Component({
   selector: 'app-carrito',
   templateUrl: './carrito.component.html',
@@ -15,13 +14,13 @@ export class CarritoComponent implements OnInit {
   public totalCarrito:number = 0;
   public entrega:number = 0;
 
-  constructor(private store:Store) {
+  constructor(private store:Store<CarritoCompras>) {
     this.carrito = this.store.select(state => {
-      this.sumarCarrito(state.carrito.carrito);
-      if (state.carrito.carrito.length>0) {
+      this.sumarCarrito(state.carrito);
+      if (state.carrito.length>0) {
         this.entrega = 7000;
       }
-      return state.carrito.carrito;
+      return state.carrito;
     });
   }
 
@@ -39,7 +38,8 @@ export class CarritoComponent implements OnInit {
   }
 
   actualizarCarrito(carrito:Carrito,cantidadNueva:string){
-    this.store.dispatch(new ActualizarCarrito(carrito, parseInt(cantidadNueva)));
+    carrito.cantidad_comprar = parseInt(cantidadNueva);
+    this.store.dispatch(new ActualizarCarrito(carrito));
   }
 
 

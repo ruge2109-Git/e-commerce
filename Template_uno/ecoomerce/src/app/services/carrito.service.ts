@@ -1,7 +1,7 @@
 import { AgregarAlCarrito } from 'src/app/states/carrito/Carrito.actions';
 import { Injectable } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { Carrito } from '../states/carrito/Carrito.model';
+import { Store } from '@ngrx/store';
+import { Carrito, CarritoCompras } from '../states/carrito/Carrito.model';
 import { Producto } from 'src/app/states/producto/Producto.model';
 
 
@@ -10,7 +10,7 @@ import { Producto } from 'src/app/states/producto/Producto.model';
 })
 export class CarritoService {
 
-  constructor(private _store:Store) { }
+  constructor(private _store:Store<CarritoCompras>) { }
 
   agregarAlCarrito(producto:Producto, cantidad:number){
     const carrito:Carrito = {

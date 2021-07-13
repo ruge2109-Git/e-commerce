@@ -1,7 +1,7 @@
 import { Producto } from "../producto/Producto.model";
 
-export class CarritoCompras{
-  carrito: Carrito[] = [];
+export interface CarritoCompras{
+  readonly carrito:Carrito[];
 }
 
 export interface Carrito{

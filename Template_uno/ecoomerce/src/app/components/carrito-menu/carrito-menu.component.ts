@@ -1,8 +1,8 @@
 
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Carrito} from 'src/app/states/carrito/Carrito.model';
+import { Carrito, CarritoCompras} from 'src/app/states/carrito/Carrito.model';
 
 @Component({
   selector: 'app-carrito-menu',
@@ -11,12 +11,21 @@ import { Carrito} from 'src/app/states/carrito/Carrito.model';
 })
 export class CarritoMenuComponent implements OnInit {
 
-  public carrito: Observable<Carrito[]>;
+  public carrito$: Observable<Carrito[]>;
   public longitudCarrito:number = 0;
 
-  constructor(private store:Store) {
-    this.carrito = this.store.select(state => {
-      const carrito = state.carrito.carrito;
+  constructor(private store:Store<CarritoCompras>) {
+
+    this.carrito$ = this.store.select((store) => {
+      return store.carrito;
+    });
+    this.carrito$ = this.store.select(state => {
+
+      const carrito = state.carrito;
+      if (carrito==null) {
+        return carrito;
+      }
+
       this.longitudCarrito = carrito.length;
 
       if (this.longitudCarrito < 3) {

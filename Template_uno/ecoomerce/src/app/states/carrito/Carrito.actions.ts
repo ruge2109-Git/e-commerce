@@ -1,21 +1,36 @@
+import { Action } from '@ngrx/store';
 import { Carrito } from "./Carrito.model";
 
-export class AgregarAlCarrito{
-  static readonly type = '[CARRITO] Agregar';
-  constructor(public payload: Carrito) {}
+export enum CarritoActionsTypes {
+  agregarAlCarrito = '[CARRITO] Agregar al carrito',
+  limpiarCarrito = '[CARRITO] Limpiar el carrito',
+  removerDelCarrito = '[CARRITO] Remover del carrito',
+  actualizarCarrito = '[CARRITO] Actualizar el carrito',
+};
+
+export class AgregarAlCarrito implements Action{
+  readonly type = CarritoActionsTypes.agregarAlCarrito;
+  constructor(public carritoNuevo: Carrito) {}
 }
 
-export class LimpiarCarrito{
-  static readonly type = '[CARRITO] Limpiar';
+export class LimpiarCarrito implements Action{
+  readonly type = CarritoActionsTypes.limpiarCarrito;
   constructor() {}
 }
 
-export class RemoverDelCarrito {
-  static readonly type = '[CARRITO] Remover';
+export class RemoverDelCarrito implements Action{
+  readonly type = CarritoActionsTypes.removerDelCarrito;
   constructor(public payload: Carrito) {}
 }
 
-export class ActualizarCarrito{
-  static readonly type = '[CARRITO] Actualizar';
-  constructor(public payload:Carrito, public cantidadNueva:number) {}
+export class ActualizarCarrito implements Action {
+  readonly type = CarritoActionsTypes.actualizarCarrito;
+  constructor(public payload:Carrito) {}
 }
+
+export type CarritoActions=
+  AgregarAlCarrito |
+  LimpiarCarrito |
+  RemoverDelCarrito |
+  ActualizarCarrito;
+

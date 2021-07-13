@@ -1,9 +1,9 @@
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RtaApi } from '../models/rta-api';
-import { Categoria } from '../states/categorias/categoria.model';
+import { Categoria, Categorias } from '../states/categorias/categoria.model';
 import { AuthJwtService } from './auth-jwt.service';
-import { Store } from '@ngxs/store';
+import { Store } from '@ngrx/store';
 import { AgregarCategorias } from '../states/categorias/categoria.actions';
 
 @Injectable({
@@ -12,7 +12,7 @@ import { AgregarCategorias } from '../states/categorias/categoria.actions';
 export class CategoriaService {
 
 
-  constructor(private http: HttpClient, private authService:AuthJwtService,private store:Store) { }
+  constructor(private http: HttpClient, private authService:AuthJwtService,private store:Store<Categorias>) { }
 
   async obtenerTodas() {
     localStorage.clear();

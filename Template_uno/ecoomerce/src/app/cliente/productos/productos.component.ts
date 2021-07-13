@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { ObtenerCategorias } from 'src/app/states/categorias/categoria.actions';
-import { Categoria } from 'src/app/states/categorias/categoria.model';
+import { Categoria, Categorias } from 'src/app/states/categorias/categoria.model';
 import { ObtenerProductos } from 'src/app/states/producto/Producto.actions';
-import { Producto } from 'src/app/states/producto/Producto.model';
+import { Producto, Productos } from 'src/app/states/producto/Producto.model';
 
 
 interface Paginacion {
@@ -21,28 +21,37 @@ interface Paginacion {
 })
 export class ProductosComponent implements OnInit {
 
-  public categorias: Observable<Categoria[]>;
+  public productos$: Observable<Producto[]>;
+  public categorias$: Observable<Categoria[]>;
+
   public cantidadPaginas: Paginacion[] = [];
   public productosEnPantalla: Producto[] = [];
   public productosTotales: Producto[] = [];
   public productosTotalesCopy: Producto[] = [];
 
-  constructor(private store: Store, private prodService: ProductoService, private categoriaService: CategoriaService) {
+  constructor(
+    private storeProductos: Store<Productos>,
+    private storeCategorias: Store<Categorias>,
+    private prodService: ProductoService,
+    private categoriaService: CategoriaService
+  ) {
     this.prodService.obtenerTodas();
 
-    this.store.dispatch(new ObtenerProductos());
-    this.store.select(state => { return state.producto.productos; })
-      .subscribe((data: Producto[]) => {
-        this.productosTotales = data;
-        this.productosTotalesCopy = data;
-        this.paginar();
+    this.storeProductos.dispatch(new ObtenerProductos());
+    this.productos$ = this.storeProductos.select(state => {
+      return state.productos;
+    });
 
-      });
+    this.productos$.subscribe((data)=>{
+      this.productosTotales = data;
+      this.productosTotalesCopy = data;
+      this.paginar();
+    });
 
     this.categoriaService.obtenerTodas();
-    store.dispatch(new ObtenerCategorias());
-    this.categorias = this.store.select(state => {
-      return state.categoria.categorias;
+    storeCategorias.dispatch(new ObtenerCategorias());
+    this.categorias$ = this.storeCategorias.select(state => {
+      return state.categorias;
     });
   }
 
@@ -75,9 +84,10 @@ export class ProductosComponent implements OnInit {
       this.cantidadPaginas[0].activa = true;
       this.productosEnPantalla = this.cantidadPaginas[0].productos;
     }
+
   }
 
-  onPaginar(pagina:Paginacion) {
+  onPaginar(pagina: Paginacion) {
     for (let i = 0; i < this.cantidadPaginas.length; i++) {
       const element = this.cantidadPaginas[i];
       element.activa = false;
@@ -117,18 +127,18 @@ export class ProductosComponent implements OnInit {
       if (element == itemActivo[0]) {
         element.activa = false;
         this.cantidadPaginas[i - 1].activa = true;
-        this.productosEnPantalla = this.cantidadPaginas[i-1].productos;
+        this.productosEnPantalla = this.cantidadPaginas[i - 1].productos;
 
       }
     }
   }
 
-  filtrarPorCategoria(categoria:Categoria){
+  filtrarPorCategoria(categoria: Categoria) {
     this.productosTotales = this.productosTotalesCopy.filter(m => m.codCategoria2.codCategoria == categoria.codCategoria);
     this.paginar();
   }
 
-  quitarFiltros(){
+  quitarFiltros() {
     this.productosTotales = this.productosTotalesCopy;
     this.paginar();
   }

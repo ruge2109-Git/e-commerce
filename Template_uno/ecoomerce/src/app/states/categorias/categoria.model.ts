@@ -1,5 +1,5 @@
-export class Categorias{
-  categorias:Categoria[] = [];
+export interface Categorias{
+  readonly categorias:Categoria[];
 }
 
 export interface Categoria{

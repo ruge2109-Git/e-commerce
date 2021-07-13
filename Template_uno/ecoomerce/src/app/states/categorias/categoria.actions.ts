@@ -1,11 +1,20 @@
 import { Categoria } from "./categoria.model";
+import { Action } from "@ngrx/store";
 
-export class ObtenerCategorias {
-  static readonly type = '[CATEGORIA] Obtener todos';
+export enum CategoriasActionsTypes {
+  obtenerCategorias = '[CATEGORIA] Obtener todos',
+  agregarCategorias = '[CATEGORIA] agregar categorias',
+};
+export class ObtenerCategorias implements Action {
+  readonly type = CategoriasActionsTypes.obtenerCategorias;
   constructor() { }
 }
 
-export class AgregarCategorias {
-  static readonly type = '[CATEGORIA] agregar categorias';
-  constructor(public categorias:Categoria[]) {}
+export class AgregarCategorias implements Action {
+  readonly type = CategoriasActionsTypes.agregarCategorias;
+  constructor(public categorias: Categoria[]) { }
 }
+
+export type CategoriaActions =
+  ObtenerCategorias |
+  AgregarCategorias;

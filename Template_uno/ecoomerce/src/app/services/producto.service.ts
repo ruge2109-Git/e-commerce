@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Store } from '@ngxs/store';
+import { Store } from '@ngrx/store';
 import { RtaApi } from '../models/rta-api';
 import { AgregarProductos } from '../states/producto/Producto.actions';
-import { Producto } from '../states/producto/Producto.model';
+import { Producto, Productos } from '../states/producto/Producto.model';
 import { AuthJwtService } from './auth-jwt.service';
 
 @Injectable({
@@ -11,7 +11,7 @@ import { AuthJwtService } from './auth-jwt.service';
 })
 export class ProductoService {
 
-  constructor(private http: HttpClient, private authService: AuthJwtService, private store: Store) { }
+  constructor(private http: HttpClient, private authService: AuthJwtService, private store: Store<Productos>) { }
 
   async obtenerTodas() {
     localStorage.clear();

@@ -46,7 +46,7 @@
           <div class="categories">
             <h3>Tipos de producto</h3>
             <ul class="p-0">
-              <li *ngFor="let cate of categorias | async" (click)="filtrarPorCategoria(cate)"><a >{{cate.nombre}} <span class="fa fa-chevron-right"></span></a></li>
+              <li *ngFor="let cate of categorias$ | async" (click)="filtrarPorCategoria(cate)"><a >{{cate.nombre}} <span class="fa fa-chevron-right"></span></a></li>
               <li (click)="quitarFiltros()"><a >Quitar filtros <span class="fa fa-chevron-right"></span></a></li>
             </ul>
           </div>

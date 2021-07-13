@@ -1,7 +1,7 @@
 import { Categoria } from "../categorias/categoria.model";
 
-export class Productos{
-  productos: Producto[] = [];
+export interface Productos{
+  readonly productos: Producto[];
 }
 
 export interface Producto{
