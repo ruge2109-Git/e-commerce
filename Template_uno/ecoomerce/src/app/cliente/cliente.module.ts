@@ -10,8 +10,9 @@ import { BlogComponent } from './blog/blog.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { DetalleProductoComponent } from './detalle-producto/detalle-producto.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarritoComponent } from './carrito/carrito.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +22,16 @@ import { CarritoComponent } from './carrito/carrito.component';
     BlogComponent,
     ContactoComponent,
     DetalleProductoComponent,
-    CarritoComponent
+    CarritoComponent,
+    CheckoutComponent
   ],
   imports: [
     CommonModule,
     ClienteRoutingModule,
     ComponentsModule,
     NgxImageZoomModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ClienteModule { }

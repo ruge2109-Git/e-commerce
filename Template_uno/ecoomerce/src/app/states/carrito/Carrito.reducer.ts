@@ -9,6 +9,10 @@ export function CarritoReducer(state: Carrito[] = initialState, action: Action) 
   const accionCarrito = action as CarritoActions;
 
   switch (accionCarrito.type) {
+
+    case CarritoActionsTypes.obtenerCarrito:
+      return state;
+
     case CarritoActionsTypes.agregarAlCarrito:
       return agregarAlCarrito(state, accionCarrito.carritoNuevo);
 
@@ -52,5 +56,5 @@ function actualizarCarrito(state:Carrito[],carrito:Carrito) {
       element.cantidad_comprar = carrito.cantidad_comprar;
     }
   });
-  return state;
+  return [...state];
 }

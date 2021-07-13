@@ -16,9 +16,6 @@ export class CarritoMenuComponent implements OnInit {
 
   constructor(private store:Store<CarritoCompras>) {
 
-    this.carrito$ = this.store.select((store) => {
-      return store.carrito;
-    });
     this.carrito$ = this.store.select(state => {
 
       const carrito = state.carrito;

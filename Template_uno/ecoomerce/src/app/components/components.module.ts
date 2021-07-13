@@ -15,6 +15,7 @@ import { TarjetaProductoComponent } from './tarjeta-producto/tarjeta-producto.co
 import { LoadingComponent } from './loading/loading.component';
 import { FormularioReseniaComponent } from './formulario-resenia/formulario-resenia.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TotalCarritoComponent } from './total-carrito/total-carrito.component';
 @NgModule({
   declarations: [
     AppbarComponent,
@@ -28,7 +29,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FooterComponent,
     TarjetaProductoComponent,
     LoadingComponent,
-    FormularioReseniaComponent
+    FormularioReseniaComponent,
+    TotalCarritoComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +52,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CarouselModule,
     TarjetaProductoComponent,
     LoadingComponent,
-    FormularioReseniaComponent
+    FormularioReseniaComponent,
+    TotalCarritoComponent
   ]
 })
 export class ComponentsModule { }

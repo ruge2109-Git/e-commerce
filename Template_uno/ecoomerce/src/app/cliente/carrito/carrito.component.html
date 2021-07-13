@@ -66,23 +66,8 @@
     </div>
     <div class="row justify-content-end">
       <div class="col col-lg-5 col-md-6 mt-5 cart-wrap wow animate__animated animate__fadeInUp">
-        <div class="cart-total mb-3">
-          <h3>Total carrito</h3>
-          <p class="d-flex">
-            <span>Subtotal</span>
-            <span>{{totalCarrito | currency:'$'}}</span>
-          </p>
-          <p class="d-flex">
-            <span>Entrega</span>
-            <span>{{entrega | currency:'$'}}</span>
-          </p>
-          <hr>
-          <p class="d-flex total-price">
-            <span>Total</span>
-            <span>{{(totalCarrito + entrega)| currency:'$'}}</span>
-          </p>
-        </div>
-        <p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceder al pago</a></p>
+        <app-total-carrito></app-total-carrito>
+        <p class="text-center"><a routerLink="/checkout" class="btn btn-primary py-3 px-4">Proceder al pago</a></p>
       </div>
     </div>
   </div>
