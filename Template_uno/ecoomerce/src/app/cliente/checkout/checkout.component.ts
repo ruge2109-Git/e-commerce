@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CiudadService } from 'src/app/services/ciudad.service';
 
 @Component({
   selector: 'app-checkout',
@@ -10,7 +11,7 @@ export class CheckoutComponent implements OnInit {
 
   public frmDatos: FormGroup;
 
-  constructor() {
+  constructor(private ciudadService:CiudadService) {
     this.frmDatos = this.newFormGroup();
   }
 

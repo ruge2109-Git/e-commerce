@@ -12,6 +12,8 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((e: HttpErrorResponse) => {
         alert("Error inesperado");
+        console.log(e);
+
         return throwError(e);
       })
     );
