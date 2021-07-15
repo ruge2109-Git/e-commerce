@@ -11,7 +11,7 @@ export class ClienteService {
   
   async create(createClienteDto: CreateClienteDto) {
     try {
-
+      
       const dataBuscada = await this.findByEmail(createClienteDto.email);
       if (dataBuscada.flag) {
         return this.update(dataBuscada.data[0].codCliente,createClienteDto);
@@ -53,9 +53,11 @@ export class ClienteService {
   async findByEmail(email:string){
     try {
       const data = await this.clienteRepository.find({
-        email:email
+        where:{
+          email:email
+        }
       });
-      if (data == null) return { "flag": false, "msg": "No hay información" };
+      if (data == null || data.length===0) return { "flag": false, "msg": "No hay información" };
       return { "flag": true, "msg": "Correcto", "data": data };
     }
     catch (error) {

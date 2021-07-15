@@ -7,7 +7,6 @@ import { CiudadModule } from './ciudad/ciudad.module';
 import { ClienteModule } from './cliente/cliente.module';
 import { ContactoModule } from './contacto/contacto.module';
 import { DepartamentoModule } from './departamento/departamento.module';
-import { DetalleCompraModule } from './detalle-compra/detalle-compra.module';
 import { DetalleFacturaModule } from './detalle-factura/detalle-factura.module';
 import { FacturaModule } from './factura/factura.module';
 import { ParametroModule } from './parametro/parametro.module';
@@ -32,7 +31,6 @@ import { TestimonioModule } from './testimonio/testimonio.module';
     ClienteModule,
     ContactoModule,
     DepartamentoModule,
-    DetalleCompraModule,
     DetalleFacturaModule,
     FacturaModule,
     ParametroModule,

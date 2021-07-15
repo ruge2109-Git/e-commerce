@@ -1,8 +1,7 @@
 import { Categoria } from "src/categorias/entities/categoria.entity";
-import { DetalleCompra } from "src/detalle-compra/entities/detalle-compra.entity";
+import { DetalleFactura } from "src/detalle-factura/entities/detalle-factura.entity";
 import { Testimonio } from "src/testimonio/entities/testimonio.entity";
 import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-
 
 @Index("FKproducto706097", ["codCategoria"], {})
 @Entity("producto", { schema: "ecommerce" })
@@ -33,10 +32,13 @@ export class Producto {
   @Column("varchar", { name: "url_imagen", nullable: true, length: 255 })
   urlImagen: string | null;
 
-  @OneToMany(() => DetalleCompra, (detalleCompra) => detalleCompra.codProducto2)
-  detalleCompras: DetalleCompra[];
+  @OneToMany(
+    () => DetalleFactura,
+    (detalleFactura) => detalleFactura.codProducto2
+  )
+  detalleFacturas: DetalleFactura[];
 
-  @ManyToOne(() => Categoria, (categoria) => categoria.codCategoria, {
+  @ManyToOne(() => Categoria, (categoria) => categoria.productos, {
     onDelete: "RESTRICT",
     onUpdate: "RESTRICT",
     eager:true
