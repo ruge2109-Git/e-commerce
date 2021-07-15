@@ -16,7 +16,6 @@ export class BlogController {
     return this.blogService.create(createBlogDto);
   }
 
-
   @Get()
   async findAll() {
     return await this.blogService.findAll();

@@ -1,26 +1,71 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { DepartamentoRepository } from './departamento.repository';
 import { CreateDepartamentoDto } from './dto/create-departamento.dto';
 import { UpdateDepartamentoDto } from './dto/update-departamento.dto';
 
 @Injectable()
 export class DepartamentoService {
-  create(createDepartamentoDto: CreateDepartamentoDto) {
-    return 'This action adds a new departamento';
+
+  constructor(@InjectRepository(DepartamentoRepository) private departamentoRepository: DepartamentoRepository) {
+
   }
 
-  findAll() {
-    return `This action returns all departamento`;
+  async create(createDepartamentoDto: CreateDepartamentoDto) {
+    try {
+      let dataNueva = this.departamentoRepository.create({ ...createDepartamentoDto });
+      const data = await this.departamentoRepository.save(dataNueva);
+      if (data == null) return { "flag": false, "msg": "No hay información" };
+      return { "flag": true, "msg": "Correcto", "data": data };
+    }
+    catch (error) {
+      return { "flag": false, "msg": "Error" };
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} departamento`;
+  async findAll() {
+    try {
+      const data = await this.departamentoRepository.find();
+      if (data == null) return { "flag": false, "msg": "No hay información" };
+      return { "flag": true, "msg": "Correcto", "data": data };
+    }
+    catch (error) {
+      return { "flag": false, "msg": "Error" };
+    }
   }
 
-  update(id: number, updateDepartamentoDto: UpdateDepartamentoDto) {
-    return `This action updates a #${id} departamento`;
+  async findOne(id: number) {
+    try {
+      const data = await this.departamentoRepository.findOne(id);
+      if (data == null) return { "flag": false, "msg": "No hay información" };
+      return { "flag": true, "msg": "Correcto", "data": data };
+    }
+    catch (error) {
+      return { "flag": false, "msg": "Error" };
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} departamento`;
+  async update(id: number, updateDepartamentoDto: UpdateDepartamentoDto) {
+    try {
+      const dataBuscada = await this.departamentoRepository.findOne(id);
+      const dataEditada = Object.assign(dataBuscada, updateDepartamentoDto);
+      const data = await this.departamentoRepository.save(dataEditada);
+      if (data == null) return { "flag": false, "msg": "No hay información" };
+      return { "flag": true, "msg": "Correcto", "data": data };
+    }
+    catch (error) {
+      return { "flag": false, "msg": "Error" };
+    }
+  }
+
+  async remove(id: number) {
+    try {
+      const data = await this.departamentoRepository.delete(id);
+      if (data == null) return { "flag": false, "msg": "No hay información" };
+      return { "flag": true, "msg": "Correcto", "data": data };
+    }
+    catch (error) {
+      return { "flag": false, "msg": "Error" };
+    }
   }
 }

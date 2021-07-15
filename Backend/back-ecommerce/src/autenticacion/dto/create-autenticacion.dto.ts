@@ -5,6 +5,7 @@ export class CreateAutenticacionDto {
     @IsString()
     @ApiProperty()
     username: string;
+    
     @IsString()
     @ApiProperty()
     password: string;

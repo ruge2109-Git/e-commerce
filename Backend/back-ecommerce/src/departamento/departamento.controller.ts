@@ -1,9 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/autenticacion/guards/jwt-auth.guard';
 import { DepartamentoService } from './departamento.service';
 import { CreateDepartamentoDto } from './dto/create-departamento.dto';
 import { UpdateDepartamentoDto } from './dto/update-departamento.dto';
 
 @Controller('departamento')
+@UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 export class DepartamentoController {
   constructor(private readonly departamentoService: DepartamentoService) {}
 
