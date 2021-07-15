@@ -19,70 +19,90 @@
     <div class="row justify-content-center">
       <div class="col-xl-10 wow animate__animated animate__fadeIn">
 
-        <form [formGroup]="frmDatos" (ngSubmit)="comprar()" class="billing-form">
+        <form [formGroup]="frmDatos" (ngSubmit)="comprar()" id="formCheckout" #formCheckout="ngForm" class="billing-form">
           <h3 class="mb-4 billing-heading">Detalles de facturación</h3>
           <div class="row align-items-end">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="primerNombre">Primer nombre *</label>
-                <input type="text" class="form-control" formControlName="primerNombre" placeholder="Digita tu primer nombre">
-                <small class="text-danger" *ngIf="condicionInvalid('primerNombre')">El primer nombre es obligatorio.</small>
+                <input type="text" class="form-control" formControlName="primerNombre"
+                  placeholder="Digita tu primer nombre">
+                <small class="text-danger" *ngIf="condicionInvalid('primerNombre')">El primer nombre es
+                  obligatorio.</small>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="segundoNombre">Segundo nombre (opcional)</label>
-                <input type="text" class="form-control" formControlName="segundoNombre" placeholder="Digita tu segundo nombre">
+                <input type="text" class="form-control" formControlName="segundoNombre"
+                  placeholder="Digita tu segundo nombre">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="primerApellido">Primer apellido *</label>
-                <input type="text" class="form-control" formControlName="primerApellido" placeholder="Digita tu primer apellido">
-                <small class="text-danger" *ngIf="condicionInvalid('primerApellido')">El primer apellido es obligatorio.</small>
+                <input type="text" class="form-control" formControlName="primerApellido"
+                  placeholder="Digita tu primer apellido">
+                <small class="text-danger" *ngIf="condicionInvalid('primerApellido')">El primer apellido es
+                  obligatorio.</small>
 
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="segundoApellido">Segundo apellido *</label>
-                <input type="text" class="form-control" formControlName="segundoApellido" placeholder="Digita tu segundo apellido">
-                <small class="text-danger" *ngIf="condicionInvalid('segundoApellido')">El segundo apellido es obligatorio.</small>
+                <input type="text" class="form-control" formControlName="segundoApellido"
+                  placeholder="Digita tu segundo apellido">
+                <small class="text-danger" *ngIf="condicionInvalid('segundoApellido')">El segundo apellido es
+                  obligatorio.</small>
               </div>
             </div>
             <div class="w-100"></div>
-            <div class="col-md-12">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="departamento">Departamento *</label>
+                <div class="select-wrap">
+                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                  <select class="form-control" formControlName="departamento" (change)="cargarCiudadPorDepartamento(obtenerPropiedadFormGroup('departamento')?.value)">
+                    <option value="" disabled>Selecciona tu departamento de residencia</option>
+                    <option *ngFor="let depto of departamentos" [value]="depto.codDepartamento">{{depto.nombre}}</option>
+                  </select>
+                </div>
+                <small class="text-danger" *ngIf="condicionInvalid('departamento')">El departamento es
+                  obligatorio.</small>
+              </div>
+            </div>
+            <div class="col-md-6">
               <div class="form-group">
                 <label for="ciudad">Ciudad *</label>
                 <div class="select-wrap">
                   <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                  <select name="" id="" class="form-control" formControlName="ciudad">
+                  <select class="form-control" formControlName="codCiudad">
                     <option value="" disabled selected>Selecciona tu ciudad de residencia</option>
-                    <option value="1">France</option>
-                    <option value="2">Italy</option>
-                    <option value="3">Philippines</option>
-                    <option value="4">South Korea</option>
-                    <option value="5">Hongkong</option>
-                    <option value="6">Japan</option>
+                    <option *ngFor="let ciudad of ciudades" [value]="ciudad.codCiudad">{{ciudad.nomCiudad}}</option>
+
                   </select>
                 </div>
-                <small class="text-danger" *ngIf="condicionInvalid('ciudad')">La ciudad es obligatoria.</small>
+                <small class="text-danger" *ngIf="condicionInvalid('codCiudad')">La ciudad es obligatoria.</small>
               </div>
             </div>
             <div class="w-100"></div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="direccion">Dirección *</label>
-                <input type="text" class="form-control" formControlName="direccion" placeholder="Escribe tu dirección de residencia">
-                <small class="text-danger" *ngIf="condicionInvalid('segundoApellido')">La dirección es obligatoria.</small>
+                <input type="text" class="form-control" formControlName="direccion"
+                  placeholder="Escribe tu dirección de residencia">
+                <small class="text-danger" *ngIf="condicionInvalid('direccion')">La dirección es
+                  obligatoria.</small>
 
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="codigoPostal">Código postal *</label>
-                <input type="text" class="form-control" formControlName="codigoPostal" placeholder="(ejemplo)= 111161">
-                <small class="text-danger" *ngIf="condicionInvalid('codigoPostal')">El código postal es obligatorio.</small>
+                <input type="number" class="form-control" formControlName="codigoPostal" placeholder="(ejemplo)= 111161">
+                <small class="text-danger" *ngIf="condicionInvalid('codigoPostal')">El código postal es
+                  obligatorio.</small>
 
               </div>
             </div>
@@ -90,14 +110,16 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="email">Email *</label>
-                <input type="text" class="form-control" formControlName="email" placeholder="Escribe tu correo electrónico">
+                <input type="text" class="form-control" formControlName="email"
+                  placeholder="Escribe tu correo electrónico">
                 <small class="text-danger" *ngIf="condicionInvalid('email')">El Email es obligatorio.</small>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="telefono">Teléfono *</label>
-                <input type="text" class="form-control" formControlName="telefono" placeholder="Escribe tu número de teléfono">
+                <input type="text" class="form-control" formControlName="telefono"
+                  placeholder="Escribe tu número de teléfono">
                 <small class="text-danger" *ngIf="condicionInvalid('telefono')">El teléfono es obligatorio.</small>
               </div>
             </div>
@@ -122,7 +144,7 @@
                   </div>
                 </div>
               </div>
-              <input type="submit" class="btn btn-primary py-3 px-4" value="Realizar mi pedido" [disabled]="frmDatos.invalid">
+              <input type="submit" form="formCheckout" class="btn btn-primary py-3 px-4" value="Realizar mi pedido"  [disabled]="frmDatos.invalid">
             </div>
           </div>
         </div>
