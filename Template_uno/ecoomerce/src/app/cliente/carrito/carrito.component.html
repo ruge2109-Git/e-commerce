@@ -66,7 +66,7 @@
     </div>
     <div class="row justify-content-end">
       <div class="col col-lg-5 col-md-6 mt-5 cart-wrap wow animate__animated animate__fadeInUp">
-        <app-total-carrito></app-total-carrito>
+        <app-total-carrito [totalCarrito]="totalCarrito" [entrega]="cantidadEnvio" ></app-total-carrito>
         <p class="text-center"><a routerLink="/checkout" class="btn btn-primary py-3 px-4">Proceder al pago</a></p>
       </div>
     </div>

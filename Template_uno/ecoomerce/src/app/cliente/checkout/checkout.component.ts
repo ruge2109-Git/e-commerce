@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Ciudad, Departamento } from 'src/app/models/Ciudad.model';
 import { Cliente } from 'src/app/models/Cliente.model';
+import { CarritoService } from 'src/app/services/carrito.service';
 import { CiudadService } from 'src/app/services/ciudad.service';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { FacturaService } from 'src/app/services/factura.service';
 
 @Component({
   selector: 'app-checkout',
@@ -15,30 +17,79 @@ export class CheckoutComponent implements OnInit {
   public frmDatos: FormGroup;
   public departamentos:Departamento[];
   public ciudades:Ciudad[];
+  public aceptaTerminos:boolean = false;
+  public spinner:boolean=false;
+
+  public totalCarrito:number = 0;
+  public cantidadEnvio:number=0;
 
   constructor(
-    private ciudadService:CiudadService,
-    private clienteService:ClienteService
+    private _ciudadService:CiudadService,
+    private _clienteService:ClienteService,
+    private _facturaService:FacturaService,
+    private _carritoService: CarritoService
   ) {
     this.frmDatos = this.newFormGroup();
     this.departamentos = [];
     this.ciudades = [];
+    this._carritoService.obtenerTotalCarrito().then((data) => {
+      this.totalCarrito = data;
+      if (data > 0) {
+        this.cantidadEnvio = 7000;
+      }
+    });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+
     this.cargarDepartamentos();
   }
 
   comprar(){
+    this.spinner = true;
     this.frmDatos.get('codCiudad')?.setValue(parseInt(this.frmDatos.get('codCiudad')?.value));
     this.frmDatos.get('codigoPostal')?.setValue(parseInt(this.frmDatos.get('codigoPostal')?.value));
-    this.clienteService.crearCliente(this.frmDatos.value).then((data)=>{
-      console.log(data);
+    this._clienteService.crearCliente(this.frmDatos.value).then((data)=>{
+      if (!data.flag) {
+        this.spinner=false;
+        return;
+      }
+      this.crearFactura(data.data.codCliente);
     });
   }
 
+  crearFactura(codCliente:number){
+    const observaciones = this.obtenerPropiedadFormGroup('observaciones')!.value;
+    this._facturaService.crearFactura(codCliente,observaciones,this.totalCarrito+this.cantidadEnvio).then((data)=>{
+      if (!data.flag) {
+        this.spinner=false;
+        return;
+      }
+      this.recorrerCarritoCompras(data.data.codFactura);
+    });
+  }
+
+  async recorrerCarritoCompras(codFactura:number){
+    const carritoCompras = await this._carritoService.obtenerCarrito();
+    carritoCompras.forEach(async carrito => {
+      await this.crearDetalleFactura(codFactura,carrito.producto.codProducto,carrito.cantidad_comprar);
+    });
+    this.spinner=false;
+    console.log("Carrito comprado");
+
+  }
+
+  crearDetalleFactura(codFactura:number,codProducto:number,cantidad:number){
+    this._facturaService.crearDetalleFactura(codFactura,codProducto,cantidad).then((data)=>{
+      return;
+    })
+  }
+
+
+
+
   cargarDepartamentos(){
-    this.ciudadService.cargarDepartamentos().then((data)=>{
+    this._ciudadService.cargarDepartamentos().then((data)=>{
       if (!data.flag) {
         return;
       }
@@ -47,7 +98,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   cargarCiudadPorDepartamento(idDepartamento:number){
-    this.ciudadService.cargarCiudadesPorDepartamento(idDepartamento).then((data)=>{
+    this._ciudadService.cargarCiudadesPorDepartamento(idDepartamento).then((data)=>{
       if (!data.flag) {
         return;
       }
@@ -67,6 +118,7 @@ export class CheckoutComponent implements OnInit {
       codigoPostal: new FormControl("",[Validators.required]),
       email: new FormControl("",[Validators.required]),
       telefono: new FormControl("",[Validators.required]),
+      observaciones: new FormControl("")
     });
   }
 

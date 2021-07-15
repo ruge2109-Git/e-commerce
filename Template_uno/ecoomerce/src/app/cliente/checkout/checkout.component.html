@@ -1,3 +1,5 @@
+<app-loading *ngIf="spinner"></app-loading>
+
 <app-appbar itemActivo="productos"></app-appbar>
 <section class="hero-wrap hero-wrap-2" style="background-image: url('assets/images/bg_2.jpg');"
   data-stellar-background-ratio="0.5">
@@ -19,7 +21,7 @@
     <div class="row justify-content-center">
       <div class="col-xl-10 wow animate__animated animate__fadeIn">
 
-        <form [formGroup]="frmDatos" (ngSubmit)="comprar()" id="formCheckout" #formCheckout="ngForm" class="billing-form">
+        <form [formGroup]="frmDatos" (ngSubmit)="comprar()" id="formCheckout" class="billing-form">
           <h3 class="mb-4 billing-heading">Detalles de facturación</h3>
           <div class="row align-items-end">
             <div class="col-md-6">
@@ -123,6 +125,13 @@
                 <small class="text-danger" *ngIf="condicionInvalid('telefono')">El teléfono es obligatorio.</small>
               </div>
             </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="observaciones">Observaciones (Opcional)</label>
+                <textarea type="text" rows="4" class="form-control" formControlName="observaciones"
+                  placeholder="Dejanos tus observaciones."></textarea>
+              </div>
+            </div>
             <div class="w-100"></div>
 
           </div>
@@ -132,7 +141,7 @@
 
         <div class="row mt-5 pt-3 d-flex">
           <div class="col-md-6">
-            <app-total-carrito></app-total-carrito>
+            <app-total-carrito [totalCarrito]="totalCarrito" [entrega]="cantidadEnvio"></app-total-carrito>
           </div>
 
           <div class="col-md-6">
@@ -140,11 +149,11 @@
               <div class="form-group">
                 <div class="col-md-12">
                   <div class="checkbox">
-                    <label><input type="checkbox" value="" class="mr-2"> Acepto los términos y condiciones</label>
+                    <label><input type="checkbox" [(ngModel)]="aceptaTerminos" class="mr-2"> Acepto los términos y condiciones</label>
                   </div>
                 </div>
               </div>
-              <input type="submit" form="formCheckout" class="btn btn-primary py-3 px-4" value="Realizar mi pedido"  [disabled]="frmDatos.invalid">
+              <input type="submit" form="formCheckout" class="btn btn-primary py-3 px-4" value="Realizar mi pedido"  [disabled]="!(!frmDatos.invalid && aceptaTerminos)">
             </div>
           </div>
         </div>

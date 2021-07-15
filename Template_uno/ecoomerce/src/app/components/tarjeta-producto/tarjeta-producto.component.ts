@@ -10,7 +10,8 @@ export class TarjetaProductoComponent implements OnInit {
 
   @Input() producto!: Producto;
 
-  constructor(private _carritoService:CarritoService) { }
+  constructor(private _carritoService:CarritoService) {
+  }
 
   ngOnInit(): void {
   }
