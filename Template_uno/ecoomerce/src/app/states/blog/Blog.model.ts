@@ -1,7 +1,7 @@
 export interface Blog{
-  cod_blog:number;
+  codBlog:number;
   fecha:string;
   titulo:string;
   descripcion:string;
-  url_imagen:string;
+  urlImagen:string;
 }

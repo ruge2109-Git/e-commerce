@@ -8,12 +8,14 @@ import { HomeComponent } from './home/home.component';
 import { NosotrosComponent } from './nosotros/nosotros.component';
 import { ProductosComponent } from './productos/productos.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { DetalleBlogComponent } from './detalle-blog/detalle-blog.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'nosotros', component: NosotrosComponent },
   { path: 'productos', component: ProductosComponent },
   { path: 'blog', component: BlogComponent },
+  { path: 'detalleBlog/:id', component: DetalleBlogComponent },
   { path: 'contacto', component: ContactoComponent },
   { path: 'detalle/:id', component: DetalleProductoComponent },
   { path: 'carrito', component: CarritoComponent },

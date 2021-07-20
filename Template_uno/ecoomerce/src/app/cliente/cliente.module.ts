@@ -13,6 +13,7 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarritoComponent } from './carrito/carrito.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { DetalleBlogComponent } from './detalle-blog/detalle-blog.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
     ContactoComponent,
     DetalleProductoComponent,
     CarritoComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    DetalleBlogComponent
   ],
   imports: [
     CommonModule,

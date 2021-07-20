@@ -1,1 +1,55 @@
-<p>blog works!</p>
+<app-appbar itemActivo="blog"></app-appbar>
+<section class="hero-wrap hero-wrap-2" style="background-image: url('assets/images/bg_2.jpg');"
+  data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-end justify-content-center">
+      <div class="col-md-9 wow animate__animated animate__fadeIn mb-5 text-center">
+        <p class="breadcrumbs mb-0"><span class="mr-2"><a href="index.html">Inicio <i
+                class="fa fa-chevron-right"></i></a></span> <span>Blog <i class="fa fa-chevron-right"></i></span></p>
+        <h2 class="mb-0 bread">Blog</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section">
+  <div class="container">
+    <div class="row d-flex">
+
+      <div *ngFor="let blog of listaBlogMostrar" class="col-lg-6 d-flex align-items-stretch wow animate__animated animate__fadeIn">
+        <div class="blog-entry d-md-flex">
+          <a [routerLink]="['/detalleBlog',blog.codBlog]" class="block-20 img" style="background-image: url('{{blog.urlImagen}}');"></a>
+          <div class="text p-4 bg-light">
+            <div class="meta">
+              <p><span class="fa fa-calendar"></span> {{blog.fecha}}</p>
+            </div>
+            <h3 class="heading mb-3"><a href="#">{{blog.titulo}}</a></h3>
+            <p>{{(blog.descripcion.length>250)? (blog.descripcion | slice:0:250)+'...':(blog.descripcion)}}</p>
+            <a [routerLink]="['/detalleBlog',blog.codBlog]" class="btn-custom">Continuar <span class="fa fa-long-arrow-right"></span></a>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="row mt-5">
+      <div class="col text-center">
+        <div class="block-27">
+          <ul>
+            <li (click)="anterior()"><a>&lt;</a></li>
+            <li *ngFor="let item of cantidadPaginas" [ngClass]="{'active': item.activa}" (click)="onPaginar(item)">
+              <a><span>{{item.pagina}}</span></a>
+            </li>
+            <!-- <li class="active"><span>1</span></li> -->
+            <li (click)="siguiente()"><a>&gt;</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>
