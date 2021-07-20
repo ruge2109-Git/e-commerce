@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Ciudad, Departamento } from 'src/app/models/Ciudad.model';
 import { Cliente } from 'src/app/models/Cliente.model';
 import { CarritoService } from 'src/app/services/carrito.service';
@@ -27,7 +28,8 @@ export class CheckoutComponent implements OnInit {
     private _ciudadService:CiudadService,
     private _clienteService:ClienteService,
     private _facturaService:FacturaService,
-    private _carritoService: CarritoService
+    private _carritoService: CarritoService,
+    private _toastr: ToastrService
   ) {
     this.frmDatos = this.newFormGroup();
     this.departamentos = [];
@@ -51,6 +53,7 @@ export class CheckoutComponent implements OnInit {
     this.frmDatos.get('codigoPostal')?.setValue(parseInt(this.frmDatos.get('codigoPostal')?.value));
     this._clienteService.crearCliente(this.frmDatos.value).then((data)=>{
       if (!data.flag) {
+        this._toastr.error("Ocurrio un error inesperado en la creación de la compra","Error");
         this.spinner=false;
         return;
       }
@@ -62,6 +65,7 @@ export class CheckoutComponent implements OnInit {
     const observaciones = this.obtenerPropiedadFormGroup('observaciones')!.value;
     this._facturaService.crearFactura(codCliente,observaciones,this.totalCarrito+this.cantidadEnvio).then((data)=>{
       if (!data.flag) {
+        this._toastr.error("Ocurrio un error inesperado en la creación de la compra","Error");
         this.spinner=false;
         return;
       }
@@ -75,7 +79,7 @@ export class CheckoutComponent implements OnInit {
       await this.crearDetalleFactura(codFactura,carrito.producto.codProducto,carrito.cantidad_comprar);
     });
     this.spinner=false;
-    console.log("Carrito comprado");
+    this._toastr.success("Se ha realizado la compra de manera correcta, enviaremos a su email la información correspondiente al pago","Correcto");
 
   }
 

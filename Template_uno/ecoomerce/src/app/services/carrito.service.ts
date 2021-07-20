@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Carrito, CarritoCompras } from '../states/carrito/Carrito.model';
 import { Producto } from 'src/app/states/producto/Producto.model';
 import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable({
@@ -14,7 +15,7 @@ export class CarritoService {
   public carrito$: Observable<Carrito[]>;
 
 
-  constructor(private _store: Store<CarritoCompras>) {
+  constructor(private _store: Store<CarritoCompras>,private toastr: ToastrService) {
     this.carrito$ = this._store.select(state => {
       return state.carrito;
     });
@@ -26,6 +27,7 @@ export class CarritoService {
       producto: producto
     };
     this._store.dispatch(new AgregarAlCarrito(carrito));
+    this.toastr.success("Se ha agregado el producto "+ producto.nombre+" a tu carrito de compras",'¡Correcto!');
   }
 
   async obtenerTotalCarrito() {

@@ -16,7 +16,7 @@ import { CarritoReducer } from './states/carrito/Carrito.reducer';
 import { NgxsModule } from '@ngxs/store';
 import { ProductoReducer } from './states/producto/Producto.reducer';
 import { CategoriaReducer } from './states/categorias/categoria.reducer';
-
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent
@@ -44,6 +44,7 @@ import { CategoriaReducer } from './states/categorias/categoria.reducer';
     NgwWowModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     NgxsModule,

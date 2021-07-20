@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~11.2.12",
+    "@angular/animations": "^11.2.14",
     "@angular/common": "~11.2.12",
     "@angular/compiler": "~11.2.12",
     "@angular/core": "~11.2.12",
@@ -28,6 +28,7 @@
     "animate.css": "^4.1.1",
     "ngx-image-zoom": "^0.6.0",
     "ngx-owl-carousel-o": "^6.0.0",
+    "ngx-toastr": "^14.0.0",
     "ngx-wow": "^2.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
