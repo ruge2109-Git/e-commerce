@@ -1,1 +1,123 @@
-<p>contacto works!</p>
+<app-loading *ngIf="spinner"></app-loading>
+
+<app-appbar></app-appbar>
+<section class="hero-wrap hero-wrap-2" style="background-image: url('assets/images/bg_2.jpg');"
+  data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-end justify-content-center">
+      <div class="col-md-9 wow animate__animated animate__fadeIn mb-5 text-center">
+        <p class="breadcrumbs mb-0"><span class="mr-2"><a href="index.html">Inicio <i
+                class="fa fa-chevron-right"></i></a></span> <span>Contáctenos<i class="fa fa-chevron-right"></i></span>
+        </p>
+        <h2 class="mb-0 bread">Contáctenos</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <div class="wrapper px-md-4">
+          <div class="row mb-5">
+            <div class="col-md-3">
+              <div class="dbox w-100 text-center">
+                <div class="icon d-flex align-items-center justify-content-center">
+                  <span class="fa fa-map-marker"></span>
+                </div>
+                <div class="text">
+                  <p><span>Dirección:</span> Cra 103 b bis #150 c-34</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="dbox w-100 text-center">
+                <div class="icon d-flex align-items-center justify-content-center">
+                  <span class="fa fa-phone"></span>
+                </div>
+                <div class="text">
+                  <p><span>Celular:</span>+57 304-533-37-53</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="dbox w-100 text-center">
+                <div class="icon d-flex align-items-center justify-content-center">
+                  <span class="fa fa-paper-plane"></span>
+                </div>
+                <div class="text">
+                  <p><span>Email:</span> <a href="mailto:jonathan.ruge.77@gmail.com">jonathan.ruge.77@gmail.com</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="dbox w-100 text-center">
+                <div class="icon d-flex align-items-center justify-content-center">
+                  <span class="fa fa-globe"></span>
+                </div>
+                <div class="text">
+                  <p><span>Web: </span> <a href="https://www.linkedin.com/in/jonathan-ruge-094965181/" target="_blank">Jonathan Ruge</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row no-gutters">
+            <div class="col-md-12">
+              <div class="contact-wrap w-100 p-md-5 p-4">
+                <h3 class="mb-4">Contáctenos</h3>
+
+                <form [formGroup]="frmDatos" (ngSubmit)="enviarMensaje()" class="contactForm">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="label" for="name">Nombres completos</label>
+                        <input type="text" formControlName="nombres" class="form-control" name="name" id="name" placeholder="Nombres">
+                        <small class="text-danger" *ngIf="condicionInvalid('nombres')">Este campo es obligatorio.</small>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="label" for="email">Correo electrónico</label>
+                        <input type="email" formControlName="email" class="form-control" name="email" id="email" placeholder="Email">
+                        <small class="text-danger" *ngIf="condicionInvalid('email')">Este campo es obligatorio.</small>
+
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label class="label" for="subject">Asunto</label>
+                        <input type="text" formControlName="asunto" class="form-control" name="subject" id="subject" placeholder="Asunto">
+                        <small class="text-danger" *ngIf="condicionInvalid('asunto')">Este campo es obligatorio.</small>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label class="label" for="#">Mensaje</label>
+                        <textarea name="message" formControlName="mensaje" class="form-control" id="message" cols="30" rows="4"
+                          placeholder="Mensaje"></textarea>
+                          <small class="text-danger" *ngIf="condicionInvalid('mensaje')">Este campo es obligatorio.</small>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <input type="submit" value="Enviar mensaje" class="btn btn-primary"  [disabled]="frmDatos.invalid">
+                        <div class="submitting"></div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>
