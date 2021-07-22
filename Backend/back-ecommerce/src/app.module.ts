@@ -12,6 +12,8 @@ import { FacturaModule } from './factura/factura.module';
 import { ParametroModule } from './parametro/parametro.module';
 import { ProductoModule } from './producto/producto.module';
 import { TestimonioModule } from './testimonio/testimonio.module';
+import { UtilidadModule } from './utilidad/utilidad.module';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -35,7 +37,8 @@ import { TestimonioModule } from './testimonio/testimonio.module';
     FacturaModule,
     ParametroModule,
     ProductoModule,
-    TestimonioModule
+    TestimonioModule,
+    UtilidadModule
   ],
   controllers: [],
   providers: [],

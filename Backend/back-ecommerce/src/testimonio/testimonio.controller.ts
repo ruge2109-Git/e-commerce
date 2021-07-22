@@ -1,9 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { TestimonioService } from './testimonio.service';
 import { CreateTestimonioDto } from './dto/create-testimonio.dto';
 import { UpdateTestimonioDto } from './dto/update-testimonio.dto';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/autenticacion/guards/jwt-auth.guard';
 
 @Controller('testimonio')
+@UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 export class TestimonioController {
   constructor(private readonly testimonioService: TestimonioService) {}
 

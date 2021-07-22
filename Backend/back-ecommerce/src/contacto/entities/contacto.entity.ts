@@ -18,5 +18,5 @@ export class Contacto {
   mensaje: string | null;
 
   @Column("date", { name: "fecha", nullable: true })
-  fecha: string | null;
+  fecha: Date | null;
 }
