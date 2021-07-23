@@ -1,0 +1,73 @@
+<div class="contenedor">
+  <div class="contenidoDashboard">
+
+    <div id="menuResponsive">
+      <div class="row">
+        <div class="col-2 boxBotonMenu">
+          <button class="btn btnMenu" (click)="abrirMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+        <div class="col">
+          <h1 class="txtTitulo m-0"><b class="text-white-titulo">LIQUOR </b>STORE</h1>
+        </div>
+      </div>
+
+      <div class="listaMenu" #listaMenuResponsive>
+        <ul>
+          <li *ngFor="let menu of listaMenu" [ngClass]="{'boxActiveResponsive': menu.active}" (click)="cambiarActivo(menu)">
+            <div class="boxMenuResponsive">
+              <div class="row">
+                <div class="col-1">
+                  <i [class]="menu.icono+''" [ngClass]="{'iconActive': menu.active}"></i>
+                </div>
+                <div class="col-8">
+                  {{menu.nombre}}
+                </div>
+                <div class="col-1">
+                  <i class="fas fa-angle-right"></i>
+                </div>
+              </div>
+            </div>
+            <hr class="m-0">
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+
+    <div class="row">
+      <div class="col-lg-2" id="boxMenu">
+        <div class="menu p-5">
+          <h1 class="txtTitulo"><b class="text-white-titulo">LIQUOR </b>STORE</h1>
+          <ul class="mt-5">
+            <li *ngFor="let menu of listaMenu" [ngClass]="{'boxActive': menu.active}" (click)="cambiarActivo(menu)">
+              <div class="boxMenu">
+                <div class="row">
+                  <div class="col-1">
+                    <i [class]="menu.icono+' text-white-titulo'" [ngClass]="{'iconActive': menu.active}"></i>
+                  </div>
+                  <div class="col-8">
+                    {{menu.nombre}}
+                  </div>
+                  <div class="col-1">
+                    <i class="fas fa-angle-right"></i>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+
+      <div class="col-lg-10 col-md-12 p-5" [@routeAnimations]="prepareRoute(outlet)">
+        <router-outlet #outlet="outlet"></router-outlet>
+      </div>
+    </div>
+
+
+  </div>
+</div>

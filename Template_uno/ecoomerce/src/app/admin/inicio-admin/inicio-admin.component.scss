@@ -1,0 +1,40 @@
+.txtTitulo {
+  letter-spacing: 0.3px;
+  font-weight: 600;
+  color: rgb(43 42 42 / 95%);
+}
+.boxMetrica {
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #423636c9;
+  font-weight: bold;
+  font-size: 125%;
+  padding: 6%;
+  margin-bottom: 5%;
+}
+
+.boxColor{
+  background: rgba(255, 255, 255, 0.80);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+
+.imgTabla{
+  width: 2vh;
+  border-radius: 50px;
+}
+
+ul{
+  list-style: none;
+}
+
+.boxCard{
+  height: 100%;
+  overflow: hidden;
+}

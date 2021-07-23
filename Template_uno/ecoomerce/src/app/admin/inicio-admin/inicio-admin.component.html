@@ -1,0 +1,100 @@
+<h1 class="txtTitulo">Dashboard</h1>
+<div class="row">
+  <div class="col-md-4" *ngFor="let metrica of listMetricas">
+    <div class="boxColor boxMetrica">
+      <i [class]="metrica.icon +' mr-3'"></i>
+      {{metrica.valorNumero>=0 ? metrica.valorNumero:''}}
+      {{metrica.descripcion}}
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4">
+
+  <div class="col-md-8 p-2">
+    <div class="boxColor boxCard p-3">
+      <h3 class="txtTitulo text-center pt-3">Ventas por mes</h3>
+      <canvas #charVentas></canvas>
+    </div>
+  </div>
+
+  <div class="col-md-4 p-2">
+    <div class="boxColor boxCard p-3">
+      <h3 class="txtTitulo text-center pt-3">Productos más vendidos</h3>
+      <ul>
+        <li>
+          <div class="row">
+            <div class="col-6">
+              <h4 class="txtTitulo">Producto</h4>
+            </div>
+            <div class="col-6">
+              <h4 class="txtTitulo">Cantidad de ventas</h4>
+            </div>
+          </div>
+          <hr class="m-1">
+        </li>
+
+        <li *ngFor="let producto of listProductos">
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-2">
+                  <img class="imgTabla mr-3" [src]="producto.urlImagen" [alt]="'Producto de licor '+producto.nombre">
+                </div>
+                <div class="col">
+
+                  {{producto.nombre}}
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <h6>10</h6>
+            </div>
+          </div>
+          <hr class="m-1">
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-md-4 p-2">
+    <div class="boxColor boxCard p-3">
+      <h3 class="txtTitulo text-center pt-3">Usuarios que mas compran</h3>
+      <ul>
+        <li>
+          <div class="row">
+            <div class="col-6">
+              <h3 class="txtTitulo">Nombre</h3>
+            </div>
+            <div class="col-6">
+              <h3 class="txtTitulo">Cantidad de compras</h3>
+            </div>
+          </div>
+          <hr class="m-1">
+        </li>
+        <li *ngFor="let cliente of [8,7,6,5,4,3,2,1]">
+          <div class="row">
+            <div class="col-6">
+              <h6>Jonathan Ruge</h6>
+            </div>
+            <div class="col-6">
+              <h6>{{cliente}}</h6>
+            </div>
+          </div>
+          <hr class="m-1">
+
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-md-8 p-2">
+    <div class="boxColor boxCard p-3">
+      <h3 class="txtTitulo text-center pt-3">Visitas vs Ventas</h3>
+      <canvas #charVisitaVsVenta></canvas>
+    </div>
+  </div>
+</div>
+
