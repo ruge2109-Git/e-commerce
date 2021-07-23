@@ -33,6 +33,13 @@ export class ProductoService {
     return await this.http.get<RtaApi<Producto[]>>('/producto', { headers: headers }).toPromise();
   }
 
+  async obtenerTodosLosProductos(){
+    localStorage.clear();
+    await this.authService.login();
+    let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
+    return await this.http.get<RtaApi<Producto[]>>('/producto', { headers: headers }).toPromise();
+  }
+
   async obtenerProducto(id: string | null) {
     localStorage.clear();
     await this.authService.login();

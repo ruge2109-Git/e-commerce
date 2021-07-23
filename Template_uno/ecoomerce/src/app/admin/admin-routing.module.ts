@@ -15,6 +15,7 @@ const routes: Routes = [
     path: '',
     component: DashboardComponent,
     children: [
+      { path:'', redirectTo:'inicio'},
       { path: 'inicio', component: InicioAdminComponent, data:{animation:'inicioAdmin'} },
       { path: 'productos', component: ProductosAdminComponent, data:{animation:'productosAdmin'} },
       { path: 'categorias', component: CategoriasAdminComponent , data:{animation:'categoriasAdmin'}},

@@ -39,7 +39,7 @@
 
     <div class="row">
       <div class="col-lg-2" id="boxMenu">
-        <div class="menu p-5">
+        <div class="menu">
           <h1 class="txtTitulo"><b class="text-white-titulo">LIQUOR </b>STORE</h1>
           <ul class="mt-5">
             <li *ngFor="let menu of listaMenu" [ngClass]="{'boxActive': menu.active}" (click)="cambiarActivo(menu)">

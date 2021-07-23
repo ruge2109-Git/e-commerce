@@ -1,1 +1,183 @@
-<h1>HOLA PERRAS DESDE PRODUCTOS</h1>
+<h1 class="txtTitulo mt-4">Productos</h1>
+
+
+<div class="boxColor">
+  <div class="boxInput mb-3">
+    <input class="inputGlass mr-3" #inputFiltro type="text" placeholder="Nombre producto" (keyup)="filtrarProducto()">
+    <button class="btn btnGlass">
+      <i class="fas fa-plus"></i>
+      Agregar
+    </button>
+  </div>
+  <!-- titulo de la tabla -->
+  <div class="row tituloPantallaMediana">
+    <div class="col-md-2">
+      <p class="txtTituloTabla">Producto</p>
+    </div>
+    <div class="col-md-1">
+      <p class="txtTituloTabla">Categoría</p>
+    </div>
+    <div class="col-md-4">
+      <p class="txtTituloTabla">Descripción</p>
+    </div>
+    <div class="col-md-2">
+      <p class="txtTituloTabla">Precio</p>
+    </div>
+    <div class="col-md-2">
+      <p class="txtTituloTabla">Cantidad en inventario</p>
+    </div>
+    <div class="col-md-1">
+      <p class="txtTituloTabla">Acciones</p>
+    </div>
+  </div>
+  <hr class="tituloPantallaMediana">
+  <div class="text-center" *ngIf="cargaProductos">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+
+  <h4 *ngIf="productosEnPantalla.length===0">No se han encontrado resultados con la busqueda</h4>
+  <!-- cuerpo de la tabla -->
+  <div class="row tituloPantallaMediana" *ngFor="let producto of productosEnPantalla">
+    <div class="col-md-2">
+      <div class="row">
+        <div class="col-4">
+          <img [src]="producto.urlImagen" class="imgTable mr-3" [alt]="'Licor con el nombre: '+producto.nombre">
+        </div>
+        <div class="col">
+          <p class="txtBodyTabla">{{producto.nombre}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1">
+      <p class="txtBodyTabla">{{producto.codCategoria2.nombre}}</p>
+    </div>
+    <div class="col-md-4">
+      <p class="txtBodyTabla">{{(producto.descripcion.length>150)? (producto.descripcion |
+        slice:0:150)+'...':(producto.descripcion)}}</p>
+    </div>
+    <div class="col-md-2">
+      <p class="txtBodyTabla">{{producto.precio|currency:'$'}}</p>
+    </div>
+    <div class="col-md-2">
+      <p class="txtBodyTabla">{{producto.cantidadInventario}}</p>
+    </div>
+    <div class="col-md-1">
+      <i class="iconTableEdit fas fa-edit mr-3" (click)="abrirModalEditar(producto)"></i>
+      <i class="iconTableDelete fas fa-trash"></i>
+    </div>
+    <div class="col-12">
+      <hr class="tituloPantallaMediana">
+    </div>
+  </div>
+
+  <!-- cuerpo responsive -->
+  <div class="cuerpoResponsive" *ngFor="let producto of productosEnPantalla">
+    <div class="row">
+      <div class="col-5 font-weight-bold">Producto:</div>
+      <div class="col-7">{{producto.nombre}}</div>
+    </div>
+    <div class="row">
+      <div class="col-5 font-weight-bold">Categoría:</div>
+      <div class="col-7">{{producto.codCategoria2.nombre}}</div>
+    </div>
+    <div class="row">
+      <div class="col-5 font-weight-bold">Descripción:</div>
+      <div class="col-7">{{(producto.descripcion.length>150)? (producto.descripcion |
+        slice:0:150)+'...':(producto.descripcion)}}</div>
+    </div>
+    <div class="row">
+      <div class="col-5 font-weight-bold">Precio:</div>
+      <div class="col-7">{{producto.precio|currency:'$'}}</div>
+    </div>
+    <div class="row">
+      <div class="col-5 font-weight-bold">Cantidad en inventario:</div>
+      <div class="col-7">{{producto.cantidadInventario}}</div>
+    </div>
+    <div class="row">
+      <div class="col-5 font-weight-bold">Acciones:</div>
+      <div class="col-7">
+        <i class="iconTableEdit fas fa-edit mr-3" (click)="abrirModalEditar(producto)"></i>
+        <i class="iconTableDelete fas fa-trash"></i>
+      </div>
+    </div>
+    <hr>
+  </div>
+
+  <div class="col text-center" *ngIf="productosEnPantalla.length>0">
+    <div class="block-paginacion">
+      <ul>
+        <li (click)="anterior()"><a>&lt;</a></li>
+        <li *ngFor="let item of cantidadPaginas" [ngClass]="{'active': item.activa}" (click)="onPaginar(item)">
+          <a><span>{{item.pagina}}</span></a>
+        </li>
+        <li (click)="siguiente()"><a>&gt;</a></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div #modalEditarProducto class="modalEditarProducto">
+  <div class="contenidoModal">
+    <div class="cuerpoModal">
+      <h1 class="txtTitulo text-center">Agregar producto</h1>
+
+
+      <form [formGroup]="frmProducto" >
+        <div class="row">
+          <div class="col-md-4">
+            <img [src]="obtenerPropiedadFormGroup('urlImagen')!.value" class="imgModal" [alt]="'Licor nuevo'">
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6">
+                <p class="txtLabel">Nombre del producto</p>
+                <input type="text" class="form-control" formControlName="nombre">
+              </div>
+              <div class="col-md-6">
+                <p class="txtLabel">Categoría</p>
+                <input type="text" class="form-control" formControlName="codCategoria">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <p class="txtLabel">Cantidad en inventario</p>
+                <input type="number" class="form-control" formControlName="cantidadInventario">
+              </div>
+              <div class="col-md-6">
+                <p class="txtLabel">Precio</p>
+                <input type="number" class="form-control" formControlName="precio">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <p class="txtLabel">Descripción</p>
+                <textarea class="w-100 form-control" formControlName="descripcion" rows="5"></textarea>
+              </div>
+            </div>
+
+            <label for="inputFile"><i class="fas fa-upload mr-3"></i>Subir imagen</label>
+            <input type="file" id="inputFile" (change)="cambiarImagen($event)">
+          </div>
+        </div>
+      </form>
+
+
+      <div class="boxBtnModal">
+        <button class="btn btnGlassCancelar  mr-3" (click)="cerrarModal()">
+          <i class="fas fa-times"></i>
+          Cancelar
+        </button>
+        <button class="btn btnGlass">
+          <i class="fas fa-plus"></i>
+          Guardar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

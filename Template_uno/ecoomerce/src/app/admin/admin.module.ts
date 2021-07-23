@@ -12,6 +12,7 @@ import { ClientesAdminComponent } from './clientes-admin/clientes-admin.componen
 import { ContactoAdminComponent } from './contacto-admin/contacto-admin.component';
 import { ParametrosAdminComponent } from './parametros-admin/parametros-admin.component';
 import { ConfiguracionAdminComponent } from './configuracion-admin/configuracion-admin.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -30,6 +31,8 @@ import { ConfiguracionAdminComponent } from './configuracion-admin/configuracion
   imports: [
     CommonModule,
     AdminRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminModule { }
