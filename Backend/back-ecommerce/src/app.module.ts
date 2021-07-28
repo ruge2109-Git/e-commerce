@@ -13,6 +13,7 @@ import { ParametroModule } from './parametro/parametro.module';
 import { ProductoModule } from './producto/producto.module';
 import { TestimonioModule } from './testimonio/testimonio.module';
 import { UtilidadModule } from './utilidad/utilidad.module';
+import { CargaArchivosModule } from './carga-archivos/carga-archivos.module';
 
 @Module({
   imports: [
@@ -38,7 +39,8 @@ import { UtilidadModule } from './utilidad/utilidad.module';
     ParametroModule,
     ProductoModule,
     TestimonioModule,
-    UtilidadModule
+    UtilidadModule,
+    CargaArchivosModule
   ],
   controllers: [],
   providers: [],
