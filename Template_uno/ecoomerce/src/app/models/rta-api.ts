@@ -3,3 +3,9 @@ export interface RtaApi<T>{
   msg:string;
   data:T;
 }
+
+
+export interface RtaApiSencilla{
+  flag:boolean;
+  msg:string;
+}

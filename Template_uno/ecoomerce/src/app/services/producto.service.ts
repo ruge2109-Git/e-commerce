@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { RtaApi } from '../models/rta-api';
+import { RtaApi, RtaApiSencilla } from '../models/rta-api';
 import { AgregarProductos } from '../states/producto/Producto.actions';
 import { Producto, Productos } from '../states/producto/Producto.model';
 import { AuthJwtService } from './auth-jwt.service';
@@ -45,5 +45,24 @@ export class ProductoService {
     await this.authService.login();
     let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
     return this.http.get<RtaApi<Producto>>(`/producto/${id}`, { headers: headers }).toPromise();
+  }
+
+  async subirImagenProducto(archivo:File, idProducto:string|undefined){
+    localStorage.clear();
+    await this.authService.login();
+    let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
+
+    const formData = new FormData();
+    formData.append('imgProd',archivo,archivo.name);
+    formData.append('idProducto',idProducto!);
+
+    return this.http.post<RtaApiSencilla>(`/carga-archivos/subirImgProducto?idProducto=${idProducto}`,formData,{headers:headers}).toPromise();
+  }
+
+  async editarProducto(idProducto:number, producto:Producto){
+    localStorage.clear();
+    await this.authService.login();
+    let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
+    return this.http.patch<RtaApi<Producto>>(`/producto/${idProducto}`,producto,{headers:headers}).toPromise();
   }
 }

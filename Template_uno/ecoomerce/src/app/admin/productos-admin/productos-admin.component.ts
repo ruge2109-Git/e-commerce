@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductoService } from 'src/app/services/producto.service';
-import { Producto, Productos } from 'src/app/states/producto/Producto.model';
+import { Producto } from 'src/app/states/producto/Producto.model';
 interface Paginacion {
   pagina: number;
   activa: boolean;
@@ -19,10 +19,15 @@ export class ProductosAdminComponent implements OnInit {
   public cantidadPaginas: Paginacion[] = [];
   public cargaProductos: boolean = false;
   public productoActual?:Producto;
+  public imagenActual?:any;
+
   public frmProducto:FormGroup;
+  public previewImagenBoolean:boolean = false;
+
 
   @ViewChild("inputFiltro", { static: true }) inputFiltro!: ElementRef;
   @ViewChild("modalEditarProducto", { static: false }) modalEditarProducto!: ElementRef;
+  @ViewChild("previewImagen", { static: false }) previewImagen!: ElementRef;
 
 
 
@@ -182,7 +187,6 @@ export class ProductosAdminComponent implements OnInit {
       cantidadInventario: new FormControl(this.productoActual.cantidadInventario, [Validators.required]),
       urlImagen: new FormControl(this.productoActual.urlImagen, [Validators.required])
     });
-
   }
 
   obtenerPropiedadFormGroup(xPropiedad: string) {
@@ -190,7 +194,44 @@ export class ProductosAdminComponent implements OnInit {
   }
 
   cambiarImagen(files: any){
-    console.log(files.target.files);
+    this.imagenActual = files.target.files[0];
+    if (this.imagenActual==null) {
+      return;
+    }
+    this.previewImagenBoolean = true;
+    setTimeout(() => {
+      this.previewImagen.nativeElement.src = URL.createObjectURL(this.imagenActual);
+    }, 100);
+  }
+
+  async guardarImagen(){
+    let urlImagen = "";
+    await this._productoService.subirImagenProducto(this.imagenActual, this.productoActual?.codProducto.toString()).then((data)=>{
+      if (!data.flag) {
+        return;
+      }
+      urlImagen = data.msg;
+    });
+    return urlImagen;
+  }
+
+  async guardarProducto(){
+
+    if (this.imagenActual!=null) {
+      const guardarImagen = await this.guardarImagen();
+      this.frmProducto.get('urlImagen')?.setValue(guardarImagen);
+    }
+
+    this.frmProducto.get('precio')?.setValue(this.frmProducto.get('precio')?.value+"");
+    const guardarImagen = await this._productoService.editarProducto(this.productoActual!.codProducto,this.frmProducto.value);
+    if (!guardarImagen.data) {
+      return;
+    }
+
+    this.cerrarModal();
+    this.obtenerProductos();
+
+
   }
 
 }
