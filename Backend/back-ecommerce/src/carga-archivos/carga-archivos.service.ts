@@ -13,11 +13,11 @@ export class CargaArchivosService {
         const archivoGuardar = `${nombre}.${extension}`;
         const client = await this.abrirConeccionFTP();
         try {
-            await client.cd('/img/ecommerce_1/')
+            await client.cd('/img/ecommerce_1/');
             await client.uploadFrom(file, archivoGuardar);
         }
         catch (err) {
-            return { flag: false, msg: 'Error al guardar el archivo' };
+            return { flag: false, msg: 'Error al guardar el archivo '+ err };
         }
         this.cerrarConeccionFTP(client);
         return {
