@@ -1,0 +1,202 @@
+.txtTitulo {
+  letter-spacing: 0.3px;
+  font-weight: 600;
+  color: rgba(70, 68, 68, 0.8);
+  font-size: 3vh;
+}
+
+.tableProductos {
+  width: 100%;
+}
+
+.boxColor {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 2%;
+}
+
+.imgProducto {
+  width: 5%;
+  border-radius: 15px;
+}
+
+.txtTituloTabla {
+  margin: 0%;
+  font-size: 120%;
+  font-weight: bold;
+}
+
+.cuerpoResponsive {
+  display: none;
+}
+
+.iconTableEdit {
+  cursor: pointer;
+  color: #6999c1;
+}
+.iconTableDelete {
+  cursor: pointer;
+  color: #e63030ab;
+}
+
+.block-paginacion > ul {
+  list-style: none;
+  padding: 0%;
+  margin: 0%;
+}
+
+.block-paginacion > ul > li {
+  text-align: center;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  border: 1px solid #6999c1;
+  margin-right: 6px;
+  cursor: pointer;
+}
+
+.txtBodyTabla {
+  padding: 0%;
+  margin: 0%;
+}
+
+.block-paginacion > ul > .active,
+.block-paginacion > ul > li:hover {
+  background: #6999c1;
+  color: #fff;
+}
+
+.imgTable {
+  width: 50px;
+  border-radius: 10px;
+}
+
+.inputGlass {
+  border-radius: 8px;
+  padding: 4px;
+  width: 20%;
+  background: #c2cbe38c;
+  border: 1px solid #9eb4e080;
+  color: #0000008c;
+}
+
+.inputGlass:focus {
+  outline: none;
+  box-shadow: 0 0 2pt 2pt rgba(152, 181, 236, 0.644);
+}
+
+.modalEditarProducto {
+  opacity: 0;
+  z-index: -1;
+  transition: all 1s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  height: 100%;
+  width: 100%;
+}
+
+.contenidoModal {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #00000054;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cuerpoModal {
+  width: 40%;
+  // height: 70%;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 2%;
+}
+
+.btnGlass {
+  background: rgba(143, 152, 251, 0.6);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.btnGlass:hover {
+  background: rgba(111, 122, 245, 0.6);
+}
+
+.btnGlassCancelar {
+  background: rgba(238, 138, 159, 0.6);
+  box-shadow: 0 8px 32px 0 rgba(135, 31, 104, 0.37);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border-radius: 10px;
+  border: 1px solid rgba(228, 82, 82, 0.18);
+}
+
+.btnGlassCancelar:hover {
+  background: rgba(235, 80, 80, 0.6);
+}
+
+.imgModal {
+  width: 100%;
+  border-radius: 15px;
+}
+
+.txtLabel {
+  margin: 0%;
+  margin-top: 2%;
+}
+
+label[for="inputFile"] {
+  width: 100%;
+  text-align: center;
+  padding: 1%;
+  background: rgba(143, 152, 251, 0.6);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: black;
+  margin-top: 2%;
+  cursor: pointer;
+}
+
+label[for="inputFile"]:hover{
+  background: rgba(111, 122, 245, 0.6);
+}
+
+input[type="file"]#inputFile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.boxBtnModal{
+  margin-top: 2%;
+  float: right;
+}
+
+@media screen and (max-width: 800px) {
+  .tituloPantallaMediana {
+    display: none;
+  }
+  .cuerpoResponsive {
+    display: block;
+  }
+}

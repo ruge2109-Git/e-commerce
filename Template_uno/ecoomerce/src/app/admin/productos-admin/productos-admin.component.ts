@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CategoriaService } from 'src/app/services/categoria.service';
 import { ProductoService } from 'src/app/services/producto.service';
+import { Categoria } from 'src/app/states/categorias/categoria.model';
 import { Producto } from 'src/app/states/producto/Producto.model';
 interface Paginacion {
   pagina: number;
@@ -17,12 +19,15 @@ export class ProductosAdminComponent implements OnInit {
   public productosTotales: Producto[] = [];
   public productosEnPantalla: Producto[] = [];
   public cantidadPaginas: Paginacion[] = [];
-  public cargaProductos: boolean = false;
-  public productoActual?:Producto;
-  public imagenActual?:any;
 
-  public frmProducto:FormGroup;
-  public previewImagenBoolean:boolean = false;
+  public listaCategorias: Categoria[] = [];
+
+  public cargaProductos: boolean = false;
+  public productoActual?: Producto;
+  public imagenActual?: any;
+
+  public frmProducto: FormGroup;
+  public previewImagenBoolean: boolean = false;
 
 
   @ViewChild("inputFiltro", { static: true }) inputFiltro!: ElementRef;
@@ -32,13 +37,15 @@ export class ProductosAdminComponent implements OnInit {
 
 
   constructor(
-    private _productoService: ProductoService
+    private _productoService: ProductoService,
+    private _categoriaService: CategoriaService
   ) {
     this.frmProducto = this.newFormGroup();
   }
 
   ngOnInit(): void {
     this.obtenerProductos();
+    this.obtenerCategorias();
   }
 
   obtenerProductos() {
@@ -50,6 +57,15 @@ export class ProductosAdminComponent implements OnInit {
       }
       this.productosTotales = data.data;
       this.paginar(this.productosTotales);
+    })
+  }
+
+  obtenerCategorias() {
+    this._categoriaService.obtenerTodasLasCategorias().then((data) => {
+      if (!data.flag) {
+        return;
+      }
+      this.listaCategorias = data.data;
     })
   }
 
@@ -155,28 +171,34 @@ export class ProductosAdminComponent implements OnInit {
 
   }
 
-  abrirModalEditar(producto:Producto) {
-    this.productoActual = producto;
+  abrirModalEditar(producto?: Producto) {
+    if (producto) {
+      this.productoActual = producto;
+    }
+    else{
+      this.productoActual = undefined;
+    }
+
     this.frmProducto = this.newFormGroup();
     this.modalEditarProducto.nativeElement.style.opacity = 1;
     this.modalEditarProducto.nativeElement.style.zIndex = 1;
   }
 
-  cerrarModal(){
+  cerrarModal() {
     this.modalEditarProducto.nativeElement.style.opacity = 0;
     this.modalEditarProducto.nativeElement.style.zIndex = -1;
   }
 
   newFormGroup() {
 
-    if (this.productoActual==null) {
+    if (this.productoActual == null) {
       return new FormGroup({
         nombre: new FormControl("", [Validators.required]),
-        codCategoria: new FormControl("", [Validators.required]),
+        codCategoria: new FormControl(0, [Validators.required]),
         descripcion: new FormControl("", [Validators.required]),
         precio: new FormControl("", [Validators.required]),
         cantidadInventario: new FormControl("", [Validators.required]),
-        urlImagen: new FormControl("", [Validators.required])
+        urlImagen: new FormControl("http://anokha.world/images/not-found.png", [Validators.required])
       });
     }
     return new FormGroup({
@@ -193,9 +215,9 @@ export class ProductosAdminComponent implements OnInit {
     return this.frmProducto.get(xPropiedad);
   }
 
-  cambiarImagen(files: any){
+  cambiarImagen(files: any) {
     this.imagenActual = files.target.files[0];
-    if (this.imagenActual==null) {
+    if (this.imagenActual == null) {
       return;
     }
     this.previewImagenBoolean = true;
@@ -204,9 +226,9 @@ export class ProductosAdminComponent implements OnInit {
     }, 100);
   }
 
-  async guardarImagen(){
+  async guardarImagen() {
     let urlImagen = "";
-    await this._productoService.subirImagenProducto(this.imagenActual, this.productoActual?.codProducto.toString()).then((data)=>{
+    await this._productoService.subirImagenProducto(this.imagenActual, this.productoActual?.codProducto.toString()).then((data) => {
       if (!data.flag) {
         return;
       }
@@ -215,23 +237,46 @@ export class ProductosAdminComponent implements OnInit {
     return urlImagen;
   }
 
-  async guardarProducto(){
+  async guardarProducto() {
 
-    if (this.imagenActual!=null) {
+    if (this.productoActual) {
+      this.guardarEditarProducto();
+      return;
+    }
+    this.guardarNuevoProducto();
+  }
+
+  async guardarEditarProducto() {
+    if (this.imagenActual != null) {
       const guardarImagen = await this.guardarImagen();
       this.frmProducto.get('urlImagen')?.setValue(guardarImagen);
     }
 
-    this.frmProducto.get('precio')?.setValue(this.frmProducto.get('precio')?.value+"");
-    const guardarImagen = await this._productoService.editarProducto(this.productoActual!.codProducto,this.frmProducto.value);
+    this.frmProducto.get('precio')?.setValue(this.frmProducto.get('precio')?.value + "");
+    this.frmProducto.get('codCategoria')?.setValue(parseInt(this.frmProducto.get('codCategoria')?.value));
+    const guardarImagen = await this._productoService.editarProducto(this.productoActual!.codProducto, this.frmProducto.value);
     if (!guardarImagen.data) {
       return;
     }
 
     this.cerrarModal();
     this.obtenerProductos();
+  }
 
+  async guardarNuevoProducto() {
+    if (this.imagenActual != null) {
+      const guardarImagen = await this.guardarImagen();
+      this.frmProducto.get('urlImagen')?.setValue(guardarImagen);
+    }
+    this.frmProducto.get('precio')?.setValue(this.frmProducto.get('precio')?.value + "");
+    this.frmProducto.get('codCategoria')?.setValue(parseInt(this.frmProducto.get('codCategoria')?.value));
+    const guardarImagen = await this._productoService.guardarNuevoProducto(this.frmProducto.value);
+    if (!guardarImagen.data) {
+      return;
+    }
 
+    this.cerrarModal();
+    this.obtenerProductos();
   }
 
 }

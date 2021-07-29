@@ -65,4 +65,11 @@ export class ProductoService {
     let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
     return this.http.patch<RtaApi<Producto>>(`/producto/${idProducto}`,producto,{headers:headers}).toPromise();
   }
+
+  async guardarNuevoProducto(producto:Producto){
+    localStorage.clear();
+    await this.authService.login();
+    let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
+    return this.http.post<RtaApi<Producto>>(`/producto`,producto,{headers:headers}).toPromise();
+  }
 }

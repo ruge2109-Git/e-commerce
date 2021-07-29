@@ -1,6 +1,6 @@
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RtaApi } from '../models/rta-api';
+import { RtaApi, RtaApiSencilla } from '../models/rta-api';
 import { Categoria, Categorias } from '../states/categorias/categoria.model';
 import { AuthJwtService } from './auth-jwt.service';
 import { Store } from '@ngrx/store';
@@ -25,6 +25,39 @@ export class CategoriaService {
         }
       }
     );
+  }
+
+  async obtenerTodasLasCategorias(){
+     localStorage.clear();
+    await this.authService.login();
+    let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
+    return await this.http.get<RtaApi<Categoria[]>>('/categorias', { headers: headers }).toPromise();
+  }
+
+  async crearCategoria(categoria:Categoria){
+    localStorage.clear();
+    await this.authService.login();
+    let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
+    return this.http.post<RtaApi<Categoria>>(`/categorias`,categoria,{headers:headers}).toPromise();
+  }
+
+  async editarCategoria(idCategoria:number,categoria:Categoria){
+    localStorage.clear();
+    await this.authService.login();
+    let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
+    return this.http.patch<RtaApi<Categoria>>(`/categorias/${idCategoria}`,categoria,{headers:headers}).toPromise();
+  }
+
+  async subirImagenProducto(archivo:File, idProducto:string|undefined){
+    localStorage.clear();
+    await this.authService.login();
+    let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
+
+    const formData = new FormData();
+    formData.append('imgProd',archivo,archivo.name);
+    formData.append('idProducto',idProducto!);
+
+    return this.http.post<RtaApiSencilla>(`/carga-archivos/subirImgProducto?idProducto=${idProducto}`,formData,{headers:headers}).toPromise();
   }
 
 }
