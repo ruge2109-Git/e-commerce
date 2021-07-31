@@ -13,11 +13,31 @@ export class CargaArchivosController {
 
   @Post("/subirImgProducto")
   @UseInterceptors(
-    FileInterceptor("imgProd",{
+    FileInterceptor("img",{
       dest:"./carga-archivos"
     })
   )
   async subirImgProducto(@UploadedFile() file,@Body() body:any){
-    return await this.cargaArchivosService.subirImagen(file.path,`Prod-${body.idProducto}`, file.mimetype.toString().split("/")[1]);
+    return await this.cargaArchivosService.subirImagen(file.path,`Producto-${body.idObjeto}`, file.mimetype.toString().split("/")[1]);
+  }
+
+  @Post("/subirImgCategoria")
+  @UseInterceptors(
+    FileInterceptor("img",{
+      dest:"./carga-archivos"
+    })
+  )
+  async subirImgCategoria(@UploadedFile() file,@Body() body:any){
+    return await this.cargaArchivosService.subirImagen(file.path,`Categoria-${body.idObjeto}`, file.mimetype.toString().split("/")[1]);
+  }
+  
+  @Post("/subirImgBlog")
+  @UseInterceptors(
+    FileInterceptor("img",{
+      dest:"./carga-archivos"
+    })
+  )
+  async subirImgBlog(@UploadedFile() file,@Body() body:any){
+    return await this.cargaArchivosService.subirImagen(file.path,`Blog-${body.idObjeto}`, file.mimetype.toString().split("/")[1]);
   }
 }
