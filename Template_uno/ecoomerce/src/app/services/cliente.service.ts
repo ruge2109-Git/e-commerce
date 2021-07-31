@@ -18,4 +18,11 @@ export class ClienteService {
     let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
     return this.http.post<RtaApi<Cliente>>(`/cliente`,clienteBody,{headers:headers}).toPromise();
   }
+
+  async obtenerClientes(){
+    localStorage.clear();
+    await this.authService.login();
+    let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
+    return this.http.get<RtaApi<Cliente[]>>(`/cliente`,{headers:headers}).toPromise();
+  }
 }
