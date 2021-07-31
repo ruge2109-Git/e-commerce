@@ -54,10 +54,10 @@ export class CategoriaService {
     let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
 
     const formData = new FormData();
-    formData.append('imgProd',archivo,archivo.name);
-    formData.append('idProducto',idProducto!);
+    formData.append('img',archivo,archivo.name);
+    formData.append('idObjeto',idProducto!);
 
-    return this.http.post<RtaApiSencilla>(`/carga-archivos/subirImgProducto?idProducto=${idProducto}`,formData,{headers:headers}).toPromise();
+    return this.http.post<RtaApiSencilla>(`/carga-archivos/subirImgCategoria`,formData,{headers:headers}).toPromise();
   }
 
 }
