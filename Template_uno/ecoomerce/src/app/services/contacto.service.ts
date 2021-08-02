@@ -17,4 +17,11 @@ export class ContactoService {
     let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
     return this.http.post<RtaApi<Contacto>>(`/contacto`,contacto,{headers:headers}).toPromise();
   }
+
+  async obtenerTodos(){
+    localStorage.clear();
+    await this.authService.login();
+    let headers: HttpHeaders = await new HttpHeaders().set('Authorization', `Bearer ${this.authService.getToken()}`);
+    return this.http.get<RtaApi<Contacto[]>>(`/contacto`,{headers:headers}).toPromise();
+  }
 }

@@ -1,1 +1,68 @@
-<p>contacto-admin works!</p>
+<h1 class="txtTitulo mt-4">Productos</h1>
+
+
+<div class="boxColor">
+  <div class="boxInput mb-3">
+    <input class="inputGlass mr-3" #inputFiltro type="text" placeholder="Buscar" (keyup)="filtrarCategoria()">
+  </div>
+  <!-- titulo de la tabla -->
+  <div class="row tituloPantallaMediana">
+    <div class="col-md-3">
+      <p class="txtTituloTabla">Nombres</p>
+    </div>
+    <div class="col-md-3">
+      <p class="txtTituloTabla">Email</p>
+    </div>
+    <div class="col-md-3">
+      <p class="txtTituloTabla">Asunto</p>
+    </div>
+    <div class="col-md-3">
+      <p class="txtTituloTabla">Mensaje</p>
+    </div>
+  </div>
+  <hr class="tituloPantallaMediana">
+  <div class="text-center" *ngIf="cargaContactos">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+
+  <h4 *ngIf="contactosEnPantalla.length===0">No se han encontrado resultados con la busqueda</h4>
+  <div class="row tituloPantallaMediana" *ngFor="let cliente of contactosEnPantalla">
+    <div class="col-md-3">
+      {{cliente.nombres}}
+    </div>
+    <div class="col-md-3">
+      {{cliente.email}}
+    </div>
+    <div class="col-md-3">
+      {{cliente.asunto}}
+    </div>
+    <div class="col-md-3">
+      {{cliente.mensaje}}
+    </div>
+
+    <div class="col-12">
+      <hr class="tituloPantallaMediana">
+    </div>
+  </div>
+
+  <!-- cuerpo responsive -->
+  <div class="cuerpoResponsive" *ngFor="let categoria of contactosEnPantalla">
+
+    <hr>
+  </div>
+
+  <div class="col text-center" *ngIf="contactosEnPantalla.length>0">
+    <div class="block-paginacion">
+      <ul>
+        <li (click)="anterior()"><a>&lt;</a></li>
+        <li *ngFor="let item of cantidadPaginas" [ngClass]="{'active': item.activa}" (click)="onPaginar(item)">
+          <a><span>{{item.pagina}}</span></a>
+        </li>
+        <li (click)="siguiente()"><a>&gt;</a></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
